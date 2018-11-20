@@ -1,0 +1,2948 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Travel&Do Prototype</title>
+    <link rel="stylesheet" href="GeneralStyle.css">
+    <link rel="stylesheet" href="1FirstLoginPage.css">
+    <link rel="stylesheet" href="2RegisterSubPage.css">
+    <link rel="stylesheet" href="3LoginSubPage.css">
+    <link rel="stylesheet" href="4DefineTownPage.css">
+    <link rel="stylesheet" href="5ProfilePage.css">
+    <link rel="stylesheet" href="6MessagingPage.css">
+    <link rel="stylesheet" href="7SearchPage.css">
+    <link rel="stylesheet" href="8ProjectsPage.css">
+    <link rel="stylesheet" href="9OthersProfile.css">
+    <link rel="stylesheet" href="10PojectsSearch.css">
+    <link rel="stylesheet" href="11ONGProfilePage.css">
+    <link rel="stylesheet" href="12AProjectPage.css">
+    <link rel="stylesheet" href="13SpecificMessagePage.css">
+    <style>
+    </style>
+    <script>
+  /*********************
+  APPLICATION NAME SPACE
+  *********************/
+
+  var appns = {};
+
+  /********************
+  VARIABLES
+  ********************/
+
+  var suggesteduser = document.getElementsByClassName("suggestedusername");
+  ProjectLocation = document.getElementsByClassName("ProfileLocation");
+  ONGListener = document.getElementsByClassName("ONGListener");
+  u = 0;
+  /*****************
+  NAVIGATION
+  ******************/
+  //////Navigating outside///////
+  appns.DisplaySignUp = function ()
+  {
+    document.getElementById("real1").style.display = "none";
+    document.getElementById("real2").style.display = "block";
+    document.getElementById("real3").style.display = "none";
+  }
+  appns.DisplayLogin= function  ()
+  {
+    document.getElementById("real1").style.display = "none";
+    document.getElementById("real3").style.display = "block";
+  }
+
+  appns.GoProjects = function()
+  {
+    document.getElementById("real5").style.display = "none";
+    document.getElementById("real6").style.display = "none";
+    document.getElementById("real7").style.display = "none";
+    document.getElementById("real8").style.display = "block";
+    document.getElementById("real9").style.display = "none";
+    document.getElementById("real10").style.display = "none";
+    document.getElementById("real11").style.display = "none";
+    document.getElementById("real12").style.display = "none";
+    document.getElementById("real13").style.display = "none";
+    document.getElementById("IconesONG").dataset.pag = "real8";
+  }
+    appns.GoMessage = function ()
+    {
+      document.getElementById("real5").style.display = "none";
+      document.getElementById("real6").style.display = "none";
+      document.getElementById("real7").style.display = "none";
+      document.getElementById("real8").style.display = "none";
+      document.getElementById("real9").style.display = "none";
+      document.getElementById("real10").style.display = "none";
+      document.getElementById("real11").style.display = "none";
+      document.getElementById("real12").style.display = "none";
+      document.getElementById("real13").style.display = "block";
+    }
+      appns.GoMessagePg = function ()
+      {
+        document.getElementById("real5").style.display = "none";
+        document.getElementById("real6").style.display = "block";
+        document.getElementById("real7").style.display = "none";
+        document.getElementById("real8").style.display = "none";
+        document.getElementById("real9").style.display = "none";
+        document.getElementById("real10").style.display = "none";
+        document.getElementById("real11").style.display = "none";
+        document.getElementById("real12").style.display = "none";
+        document.getElementById("real13").style.display = "none";
+        //////////////////
+        document.getElementById("TheMessage").style.display = "block";
+        document.getElementById("Messagehr").style.display = "block";
+        //////////////////
+        var Prev = document.getElementsByClassName("MessageItself");
+        Mssg = document.getElementsByClassName("MessagesOfUser");
+        if (u === 0)
+        {
+          Prev[0].innerHTML = "Hello There! Thank you for your interest in helping...";
+          return;
+        }
+        else if (Mssg[u-1].innerHTML.length < 55)
+        {
+          Prev[0].innerHTML = Mssg[u-1].innerHTML.substring(0,55);
+        }
+        else if (Mssg[u-1].innerHTML.length >= 55)
+        {
+          Prev[0].innerHTML = Mssg[u-1].innerHTML.substring(0,55) + "...";
+        }
+      }
+      appns.SendMessage = function (ev)
+      {
+        balao = document.getElementsByClassName("MessagesOfUser");
+        Message = document.getElementById("YourMessage");
+        /////
+        if ((Message.value === "Type a Message...") || (Message.value === ""))
+        {
+          return;
+        }
+        balao[u].style.display = "block";
+        balao[u].innerHTML = Message.value;
+        u++;
+        appns.BlurMessage();
+      }
+      appns.FocusMessage = function (ev)
+      {
+        ev.target.value = "";
+        ev.target.style.fontSize = "125%";
+        ev.target.style.color = "black";
+      }
+      appns.BlurMessage = function ()
+      {
+        var Message = document.getElementById("YourMessage");
+        Message.value = "Type a Message...";
+        Message.style.fontSize = "100%";
+        Message.style.color = "gray"
+        Message.blur();
+      }
+      appns.Provisional = function (ev)
+      {
+        if (ev.key === "Enter")
+        {
+          appns.SendMessage();
+        }
+      }
+
+  appns.GoSearch = function()
+  {
+    document.getElementById("real5").style.display = "none";
+    document.getElementById("real6").style.display = "none";
+    document.getElementById("real7").style.display = "block";
+    document.getElementById("real8").style.display = "none";
+    document.getElementById("real9").style.display = "none";
+    document.getElementById("real10").style.display = "none";
+    document.getElementById("real11").style.display = "none";
+    document.getElementById("real12").style.display = "none";
+    document.getElementById("real13").style.display = "none";
+    ///////////////////////
+    document.getElementById("ProjectsInProfileSP").style.display = "none";
+    document.getElementById("ProjectsInProfileTQ").style.display = "none";
+    document.getElementById("ProjectsInProfileRY").style.display = "none";
+    document.getElementById("ProjectsInProfileJD").style.display = "none";
+    document.getElementById("PhotosInProfileSP").style.display = "none";
+    document.getElementById("PhotosInProfileTQ").style.display = "none";
+    document.getElementById("PhotosInProfileRY").style.display = "none";
+    document.getElementById("PhotosInProfileJD").style.display = "none";
+  }
+  appns.GoMj = function()
+  {
+    document.getElementById("real5").style.display = "none";
+    document.getElementById("real6").style.display = "block";
+    document.getElementById("real7").style.display = "none";
+    document.getElementById("real8").style.display = "none";
+    document.getElementById("real9").style.display = "none";
+    document.getElementById("real10").style.display = "none";
+    document.getElementById("real11").style.display = "none";
+    document.getElementById("real12").style.display = "none";
+    document.getElementById("real13").style.display = "none";
+  }
+  appns.GoProfile = function()
+  {
+    document.getElementById("real5").style.display = "block";
+    document.getElementById("real6").style.display = "none";
+    document.getElementById("real7").style.display = "none";
+    document.getElementById("real8").style.display = "none";
+    document.getElementById("real9").style.display = "none";
+    document.getElementById("real10").style.display = "none";
+    document.getElementById("real11").style.display = "none";
+    document.getElementById("real12").style.display = "none";
+    document.getElementById("real13").style.display = "none";
+  }
+
+      appns.DisplayPhotos = function ()
+      {
+        document.getElementById("ProjectsProfileExp").style.display = "none";
+        document.getElementById("ProjectsProfile").style.fontWeight = "normal";
+        document.getElementById("Profilehr").style.float = "left";
+        document.getElementById("PhotosProfileExp").style.display = "block";
+        document.getElementById("PhotosProfile").style.fontWeight = "bold";
+      }
+      appns.DisplayProjects = function ()
+      {
+        document.getElementById("ProjectsProfileExp").style.display = "block";
+        document.getElementById("ProjectsProfile").style.fontWeight = "bold";
+        document.getElementById("Profilehr").style.float = "right";
+        document.getElementById("PhotosProfileExp").style.display = "none";
+        document.getElementById("PhotosProfile").style.fontWeight = "normal";
+      }
+
+
+
+    appns.BackArrow = function ()
+    {
+      document.getElementById("real9").style.display = "none";
+      document.getElementById("real7").style.display = "block";
+      /////////
+      document.getElementById("ProjectsInProfileSP").style.display = "none";
+      document.getElementById("ProjectsInProfileTQ").style.display = "none";
+      document.getElementById("ProjectsInProfileRY").style.display = "none";
+      document.getElementById("ProjectsInProfileJD").style.display = "none";
+      document.getElementById("PhotosInProfileSP").style.display = "none";
+      document.getElementById("PhotosInProfileTQ").style.display = "none";
+      document.getElementById("PhotosInProfileRY").style.display = "none";
+      document.getElementById("PhotosInProfileJD").style.display = "none";
+    }
+
+    appns.BackArrow2 = function ()
+    {
+      document.getElementById("real10").style.display = "none";
+      document.getElementById("real9").style.display = "block";
+    }
+
+    appns.GoBackONG = function ()
+    {
+      if (document.getElementById("IconesONG").dataset.pag === "real8")
+      {
+        document.getElementById("real11").style.display = "none";
+        document.getElementById("real8").style.display = "block";
+      }
+      else if (document.getElementById("IconesONG").dataset.pag === "real10")
+      {
+        document.getElementById("real11").style.display = "none";
+        document.getElementById("real10").style.display = "block";
+      }
+    }
+
+  /*****************
+  EVENT HANDLER
+  ******************/
+  appns.FocusSearch = function (ev)
+  {
+    ev.target.value = "";
+    ev.target.style.color = "#6666ff";
+    document.getElementById("Full").style.display = "none";
+  }
+  appns.BlurSearch = function (ev)
+  {
+    ev.target.value = "Search...";
+    ev.target.style.color = "gray";
+    document.getElementById("Full").style.display = "block";
+  }
+
+
+
+  appns.Registration = function ()
+  {
+  var Name = document.getElementById("Name").value;
+  LastName = document.getElementById("LastName").value;
+  Email = document.getElementById("Email").value;
+  ConfirmEmail = document.getElementById("ConfirmEmail").value;
+  Username = document.getElementById("Username").value;
+  Password = document.getElementById("Password").value;
+  ConfirmPassword = document.getElementById("ConfirmPassword").value;
+  ///////////////////////////////////////////////////////////////////
+
+    if (Name === "" || LastName === "" || Username === "" || Password === "" || ConfirmPassword === "")
+    {
+      alert("Please Complete Every Field");
+      return;
+    }
+    if (Password != ConfirmPassword)
+    {
+      alert("Password doesn't match")
+      return;
+    }
+    document.getElementById("Usernamedis").innerHTML = Name + " " + LastName;
+    ///////Display Next Page/////////
+    document.getElementById("real2").style.display = "none";
+    document.getElementById("real4").style.display = "block";
+  }
+
+
+  appns.LogIn = function ()
+  {var Usernamelog = document.getElementById("Usernamelog").value;
+  Passwordlog = document.getElementById("Passwordlog").value;
+  Name = document.getElementById("Name").value;
+  LastName = document.getElementById("LastName").value;
+
+    if (Usernamelog === "" || Passwordlog === "")
+    {
+      alert("Please Complete");
+      return;
+    }
+
+    if (Name != "")
+      {
+        document.getElementById("Usernameis").innerHTML = "" + Name + ", it's up to you...";
+      }
+
+
+    if (Name != "" && LastName != "")
+    {
+      document.getElementById("Usernamedis").innerHTML = Name + " " + LastName;
+    }
+    else
+    {
+      document.getElementById("Usernamedis").innerHTML = Usernamelog;
+    }
+    ////display next page//////
+    document.getElementById("real3").style.display = "none";
+    document.getElementById("real4").style.display = "block";
+  }
+
+
+  appns.Facebook = function ()
+  {
+    var Str = prompt("This would have signed you in with Facebook.\n\
+    However, for the functionality of this prototype, please enter your first and last name:", "");
+
+    if (Str === null || Str === "")
+    {
+      alert ("Please fill out your first and last name.");
+      return;
+    }
+
+    document.getElementById("Usernamedis").innerHTML = Str;
+    //display//
+    document.getElementById("real1").style.display = "none";
+    document.getElementById("real3").style.display = "none";
+    document.getElementById("real4").style.display = "block";
+  }
+
+
+  /*******************
+  Defining Base Town
+  *******************/
+  appns.DefineTown = function ()
+  {var Town = document.getElementById("CurrentTown").value;
+    ProjectName = document.getElementsByClassName("ProjectName");
+    ProjectDescp = document.getElementsByClassName("ProjectDescp");
+    NGO = document.getElementsByClassName("NGO");
+    Reviews = document.getElementsByClassName("Reviews");
+    Photos = document.getElementsByClassName("Photos");
+    if (Town === "")
+    {
+      alert("Please Select a Location");
+      return;
+    }
+
+  ///////////////////////
+  var espaco0 = document.getElementsByClassName("espaco");
+  espaco1 = document.getElementsByClassName("espaco2");
+  espaco2 = document.getElementsByClassName("espaco3");
+  espaco3 = document.getElementsByClassName("espaco4");
+  width0 = document.getElementsByClassName("NGOReviewPhoto");
+  width1 = document.getElementsByClassName("NGOReviewPhoto2");
+  width2 = document.getElementsByClassName("NGOReviewPhoto3");
+  width3 = document.getElementsByClassName("NGOReviewPhoto4");
+
+  if (Town === "Bogota")
+      {
+        ProjectName[0].innerHTML = "Action for Poverty";
+        ProjectName[1].innerHTML = "Water 4 Bogotá";
+        ProjectName[2].innerHTML = "Inclusive Tennis";
+        ProjectName[3].innerHTML = "Clean Alcala";
+        //////////
+        NGO[0].innerHTML = "AAP";
+          for (var i = 0; i < 3; i++)
+            {
+              espaco0[i].style.padding = "0% 3%";
+              width0[0].style.width = "85%";
+            }
+        NGO[1].innerHTML = "Water 4";
+          for (var i = 0; i < 3; i++)
+            {
+              espaco1[i].style.padding = "0% 3%";
+              width1[0].style.width = "91%";
+            }
+        NGO[2].innerHTML = "Tenis+";
+          for (var i = 0; i < 3; i++)
+            {
+              espaco2[i].style.padding = "0% 2%";
+              width2[0].style.width = "92%";
+            }
+        NGO[3].innerHTML = "Limpia Capital";
+          for (var i = 0; i < 3; i++)
+            {
+              espaco3[i].style.padding = "0% 1%";
+              width3[0].style.width = "93%";
+            }
+        //////////
+        Reviews[0].innerHTML = "17";
+        Reviews[1].innerHTML = "23";
+        Reviews[2].innerHTML = "12";
+        Reviews[3].innerHTML = "9";
+        //////////
+        Photos[0].innerHTML = "42";
+        Photos[1].innerHTML = "9";
+        Photos[2].innerHTML = "none";
+        Photos[3].innerHTML = "13";
+        //////////
+        ProjectDescp[0].innerHTML = "The project's objective is to give food,\
+        supplies, and company to homeless people.\
+        Action Against Poverty takes\
+        place in Ciudad Bolivar and its objective...";
+        ProjectDescp[1].innerHTML = "Water 4 Bogota is a project that teaches\
+        safety water procedures for people in the\
+        poor south area of Bogota. The project\
+        is a weekly class on Saturdays...";
+        ProjectDescp[2].innerHTML = "Inclusive Tennis is a project that every\
+        Friday takes kids from public\
+        to a club for a free Tennis\
+        lessons. THe idea is to show the\
+        kids the importnce of sports...";
+        ProjectDescp[3].innerHTML = "Clean Alcala is a simple project that\
+        invites travelers to clean the Alcala\
+        park every wednesday afternoon.\
+        Alcala park is located...";
+      }
+  else if (Town === "Sioux City")
+      {
+        ProjectName[0].innerHTML = "Campus Kitchen";
+        ProjectName[1].innerHTML = "Recycling Day";
+        ProjectName[2].innerHTML = "Retirement Visit";
+        ProjectName[3].innerHTML = "Play with the Kids";
+        //////////
+        NGO[0].innerHTML = "Morningside";
+          for (var i = 0; i < 3; i++)
+            {
+              espaco0[i].style.padding = "0% 1.5%";
+              width0[0].style.width = "90%";
+            }
+        NGO[1].innerHTML = "Sustainable SXC";
+            for (var i = 0; i < 3; i++)
+              {
+                espaco1[i].style.padding = "0% 0%";
+                width1[0].style.width = "94%";
+              }
+        NGO[2].innerHTML = "Sioux City GO";
+          for (var i = 0; i < 3; i++)
+            {
+              espaco2[i].style.padding = "0% 1.5%";
+              width2[0].style.width = "93%";
+            }
+        NGO[3].innerHTML = "Sioux City GO";
+          for (var i = 0; i < 3; i++)
+            {
+              espaco3[i].style.padding = "0% 1%";
+              width3[0].style.width = "93%";
+            }
+        //////////
+        Reviews[0].innerHTML = "8";
+        Reviews[1].innerHTML = "22";
+        Reviews[2].innerHTML = "3";
+        Reviews[3].innerHTML = "18";
+        //////////
+        Photos[0].innerHTML = "6";
+        Photos[1].innerHTML = "18";
+        Photos[2].innerHTML = "11";
+        Photos[3].innerHTML = "31";
+        //////////
+        ProjectDescp[0].innerHTML = "The project takes left-overs\
+        from the cafeteria to a local church\
+        to feed homeless people \
+        Every Monday...";
+        ProjectDescp[1].innerHTML = "This project, that started in Morningside\
+        College, consists on knocking\
+        on people's door every sunday night to\
+        collect recycling materials...";
+        ProjectDescp[2].innerHTML = "The Sioux City retirement house \
+        takes volunteers to play and share\
+        stories with the residents of the house.\
+        Every Friday afternoon...";
+        ProjectDescp[3].innerHTML = "The Sioux City Go organization \
+        organizaes a monthly play around with the kids from public\
+        schools in town. The idea of the project is to\
+        teach the kids valueable things and...";
+      }
+    else if (Town === "Brasília")
+      {
+        ProjectName[0].innerHTML = "Ismael House";
+        ProjectName[1].innerHTML = "Clean Esplanada";
+        ProjectName[2].innerHTML = "Donate for Ceilandia";
+        ProjectName[3].innerHTML = "Teach in Parque da Cidade";
+        //////////
+        NGO[0].innerHTML = "Laços da Alegria";
+          for (var i = 0; i < 3; i++)
+            {
+              espaco0[i].style.padding = "0% 0.2%";
+              width0[0].style.width = "95%";
+            }
+        NGO[1].innerHTML = "Bsb Verde";
+          for (var i = 0; i < 3; i++)
+            {
+              espaco1[i].style.padding = "0% 1.5%";
+              width1[0].style.width = "90%";
+            }
+        NGO[2].innerHTML = "Bsb Verde";
+          for (var i = 0; i < 3; i++)
+            {
+              espaco2[i].style.padding = "0% 1%";
+              width2[0].style.width = "90%";
+            }
+        NGO[3].innerHTML = "Educa Brasília";
+          for (var i = 0; i < 3; i++)
+            {
+              espaco3[i].style.padding = "0% 0.5%";
+              width3[0].style.width = "95%";
+            }
+        //////////
+        Reviews[0].innerHTML = "25";
+        Reviews[1].innerHTML = "31";
+        Reviews[2].innerHTML = "4";
+        Reviews[3].innerHTML = "16";
+        //////////
+        Photos[0].innerHTML = "19";
+        Photos[1].innerHTML = "24";
+        Photos[2].innerHTML = "none";
+        Photos[3].innerHTML = "21";
+        //////////
+        ProjectDescp[0].innerHTML = "Every Sunday a group of students\
+        organizes a visit to the orphanage Casa Ismael\
+        to play and share with the kids. The main idea \
+        of the project is...";
+        ProjectDescp[1].innerHTML = "One of the most iconic places of\
+        Brasilia is The Esplanada dos Ministerios \
+        This project organizes a monthly clean up \
+        of this iconical place...";
+        ProjectDescp[2].innerHTML = "Ceilandia is a vulnerable region\
+        around Brasilia. The objective of this project is to\
+        gather donations of any kind to take to families\
+        in Ceilandia...";
+        ProjectDescp[3].innerHTML = "Every 15 days, a massive teaching\
+        session occurs in Parque da Cidade. People with any type\
+        of knowledge teach the public in sessions of 45 minutes...";
+      }
+    else if (Town === "Medellín")
+      {
+        ProjectName[0].innerHTML = "Medellín is Peace";
+        ProjectName[1].innerHTML = "Conscious Comuna 13";
+        ProjectName[2].innerHTML = "Multi Sports Medellín";
+        ProjectName[3].innerHTML = "Victims of Antioquia";
+        //////////
+        NGO[0].innerHTML = "Colombia PAZ";
+          for (var i = 0; i < 3; i++)
+            {
+              espaco0[i].style.padding = "0% 1%";
+              width0[0].style.width = "95%";
+            }
+        NGO[1].innerHTML = "Por Medellin";
+          for (var i = 0; i < 3; i++)
+            {
+              espaco1[i].style.padding = "0% 1.5%";
+              width1[0].style.width = "95%";
+            }
+        NGO[2].innerHTML = "Por Medellin";
+          for (var i = 0; i < 3; i++)
+            {
+              espaco2[i].style.padding = "0% 1.5%";
+              width2[0].style.width = "95%";
+            }
+        NGO[3].innerHTML = "Colombia PAZ";
+          for (var i = 0; i < 3; i++)
+            {
+              espaco3[i].style.padding = "0% 1%";
+              width3[0].style.width = "95%";
+            }
+        //////////
+        Reviews[0].innerHTML = "43";
+        Reviews[1].innerHTML = "21";
+        Reviews[2].innerHTML = "16";
+        Reviews[3].innerHTML = "28";
+        //////////
+        Photos[0].innerHTML = "88";
+        Photos[1].innerHTML = "37";
+        Photos[2].innerHTML = "12";
+        Photos[3].innerHTML = "11";
+        //////////
+        ProjectDescp[0].innerHTML = "This projects wants to\
+        change the vision of Medellín as a\
+        violent city. Colombia PAZ organizaes\
+        tours around places of the city to show tourists\
+        how the the city changed...";
+        ProjectDescp[1].innerHTML = "Once known for the violence,\
+        this project wants to make the Comuna the most sustainable\
+        region of Medellín by teaching sustainability and...";
+        ProjectDescp[2].innerHTML = "In the park Bolivar, every Sunday\
+        morning, a multi sports lesson is teached to the community.\
+        From soccer to Capoeira, various sports...";
+        ProjectDescp[3].innerHTML = "The conflict in Colombia heavily\
+        hurt Antioquia Region. This project treats the victims and\
+        tries to use various skillsets of travelers to help... ";
+      }
+    else if (Town === "Cartagena")
+      {
+        ProjectName[0].innerHTML = "Agua para Manaure";
+        ProjectName[1].innerHTML = "Cartagena Empreendedora";
+        ProjectName[2].innerHTML = "Limpia Boca Grande";
+        ProjectName[3].innerHTML = "Cartagena Integrada";
+        //////////
+        NGO[0].innerHTML = "Water 4";
+          for (var i = 0; i < 3; i++)
+            {
+              espaco0[i].style.padding = "0% 3%";
+              width0[0].style.width = "87%";
+            }
+        NGO[1].innerHTML = "MunEmpree";
+          for (var i = 0; i < 3; i++)
+            {
+              espaco1[i].style.padding = "0% 2%";
+              width1[0].style.width = "93%";
+            }
+        NGO[2].innerHTML = "Cartagena Culta";
+          for (var i = 0; i < 3; i++)
+            {
+              espaco2[i].style.padding = "0% 0%";
+              width2[0].style.width = "95%";
+            }
+        NGO[3].innerHTML = "Cartagena Culta";
+          for (var i = 0; i < 3; i++)
+            {
+              espaco3[i].style.padding = "0% 0%";
+              width3[0].style.width = "95%";
+            }
+        //////////
+        Reviews[0].innerHTML = "3";
+        Reviews[1].innerHTML = "9";
+        Reviews[2].innerHTML = "14";
+        Reviews[3].innerHTML = "12";
+        //////////
+        Photos[0].innerHTML = "1";
+        Photos[1].innerHTML = "6";
+        Photos[2].innerHTML = "11";
+        Photos[3].innerHTML = "7";
+        //////////
+        ProjectDescp[0].innerHTML = "In the North of Colombia,\
+        the area of Manaure created a destilation project\
+        to collect water from the sea. The project needs\
+        technical engineering knowledge...";
+        ProjectDescp[1].innerHTML = "This project teaches\
+        entrepreneurship lessons to the peddlers of the city.\
+        The idea is to enhance...";
+        ProjectDescp[2].innerHTML = "Boca Grande is one of the most iconic\
+        beaches of Cartagena and yet, one of the dirtiest. This project\
+        organizes a monthly clean up to raise awareness...";
+        ProjectDescp[3].innerHTML = "This project promotes cultural\
+        exchange between tourists and locals.\
+        The idea is that both sides can learn more about\
+        the other's culture...";
+      }
+
+    document.getElementById("locationP").innerHTML = Town;
+    ////////
+    document.getElementById("real4").style.display = "none";
+    document.getElementById("real8").style.display = "block";
+  }
+
+  /*****************
+  SUB PAGES
+  ******************/
+  appns.DisplayPhotos2 = function ()
+  {
+    if (document.getElementById("ProjectsInProfileSP").style.display === "block")
+    {
+      document.getElementById("ProjectsInProfileSP").style.display = "none";
+      document.getElementById("ProjectsProfile2").style.fontWeight = "normal";
+      document.getElementById("Profilehr2").style.float = "left";
+      document.getElementById("PhotosInProfileSP").style.display = "block";
+      document.getElementById("PhotosProfile2").style.fontWeight = "bold";
+    }
+    else if (document.getElementById("ProjectsInProfileTQ").style.display === "block")
+    {
+      document.getElementById("ProjectsInProfileTQ").style.display = "none";
+      document.getElementById("ProjectsProfile2").style.fontWeight = "normal";
+      document.getElementById("Profilehr2").style.float = "left";
+      document.getElementById("PhotosInProfileTQ").style.display = "block";
+      document.getElementById("PhotosProfile2").style.fontWeight = "bold";
+    }
+    else if (document.getElementById("ProjectsInProfileRY").style.display === "block")
+    {
+      document.getElementById("ProjectsInProfileRY").style.display = "none";
+      document.getElementById("ProjectsProfile2").style.fontWeight = "normal";
+      document.getElementById("Profilehr2").style.float = "left";
+      document.getElementById("PhotosInProfileRY").style.display = "block";
+      document.getElementById("PhotosProfile2").style.fontWeight = "bold";
+    }
+    else if (document.getElementById("ProjectsInProfileJD").style.display === "block")
+    {
+      document.getElementById("ProjectsInProfileJD").style.display = "none";
+      document.getElementById("ProjectsProfile2").style.fontWeight = "normal";
+      document.getElementById("Profilehr2").style.float = "left";
+      document.getElementById("PhotosInProfileJD").style.display = "block";
+      document.getElementById("PhotosProfile2").style.fontWeight = "bold";
+    }
+  }
+  appns.DisplayProjects2 = function ()
+  {
+    if (document.getElementById("PhotosInProfileSP").style.display === "block")
+    {
+      document.getElementById("ProjectsInProfileSP").style.display = "block";
+      document.getElementById("ProjectsProfile2").style.fontWeight = "bold";
+      document.getElementById("Profilehr2").style.float = "right";
+      document.getElementById("PhotosInProfileSP").style.display = "none";
+      document.getElementById("PhotosProfile2").style.fontWeight = "normal";
+    }
+    else if (document.getElementById("PhotosInProfileTQ").style.display === "block")
+    {
+      document.getElementById("ProjectsInProfileTQ").style.display = "block";
+      document.getElementById("ProjectsProfile2").style.fontWeight = "bold";
+      document.getElementById("Profilehr2").style.float = "right";
+      document.getElementById("PhotosInProfileTQ").style.display = "none";
+      document.getElementById("PhotosProfile2").style.fontWeight = "normal";
+    }
+    else if (document.getElementById("PhotosInProfileRY").style.display === "block")
+    {
+      document.getElementById("ProjectsInProfileRY").style.display = "block";
+      document.getElementById("ProjectsProfile2").style.fontWeight = "bold";
+      document.getElementById("Profilehr2").style.float = "right";
+      document.getElementById("PhotosInProfileRY").style.display = "none";
+      document.getElementById("PhotosProfile2").style.fontWeight = "normal";
+    }
+    else if (document.getElementById("PhotosInProfileJD").style.display === "block")
+    {
+      document.getElementById("ProjectsInProfileJD").style.display = "block";
+      document.getElementById("ProjectsProfile2").style.fontWeight = "bold";
+      document.getElementById("Profilehr2").style.float = "right";
+      document.getElementById("PhotosInProfileJD").style.display = "none";
+      document.getElementById("PhotosProfile2").style.fontWeight = "normal";
+    }
+  }
+  appns.DisplayPhotosONG = function ()
+  {
+    document.getElementById("ProjectsInProfileONG").style.display = "none";
+    document.getElementById("ONGProjectsProfile").style.fontWeight = "normal";
+    document.getElementById("ONGProfilehr").style.float = "left";
+    document.getElementById("PhotosInProfileONG").style.display = "block";
+    document.getElementById("ONGPhotosProfile").style.fontWeight = "bold";
+  }
+  appns.DisplayProjectsONG = function ()
+  {
+    document.getElementById("ProjectsInProfileONG").style.display = "block";
+    document.getElementById("ONGProjectsProfile").style.fontWeight = "bold";
+    document.getElementById("ONGProfilehr").style.float = "right";
+    document.getElementById("PhotosInProfileONG").style.display = "none";
+    document.getElementById("ONGPhotosProfile").style.fontWeight = "normal";
+  }
+
+  appns.OtherUser = function (ev)
+  {var Username = ev.target.innerHTML;
+
+    if (Username === "Samuel Padilla")
+    {
+      document.getElementById("ProfileDescription").innerHTML = "I blindly believe that Traveling Can Change the World. <br>\
+      We're in the process."
+        if (document.getElementById("Profilehr2").style.float === "left")
+          {
+            document.getElementById("ProjectsInProfileSP").style.display = "none";
+            document.getElementById("PhotosInProfileSP").style.display = "block";
+          }
+        else
+        {
+          document.getElementById("ProjectsInProfileSP").style.display = "block";
+          document.getElementById("PhotosInProfileSP").style.display = "none";
+        }
+    }
+    else if (Username === "Tomás Queiroz")
+    {
+      document.getElementById("ProfileDescription").innerHTML = "Vai dar Bom...";
+      if (document.getElementById("Profilehr2").style.float === "left")
+        {
+          document.getElementById("ProjectsInProfileTQ").style.display = "none";
+          document.getElementById("PhotosInProfileTQ").style.display = "block";
+        }
+      else
+      {
+        document.getElementById("ProjectsInProfileTQ").style.display = "block";
+        document.getElementById("PhotosInProfileTQ").style.display = "none";
+      }
+    }
+    else if (Username === "Richard Yates")
+    {
+      document.getElementById("ProfileDescription").innerHTML = "This can be huge...";
+      if (document.getElementById("Profilehr2").style.float === "left")
+        {
+          document.getElementById("ProjectsInProfileRY").style.display = "none";
+          document.getElementById("PhotosInProfileRY").style.display = "block";
+        }
+      else
+      {
+        document.getElementById("ProjectsInProfileRY").style.display = "block";
+        document.getElementById("PhotosInProfileRY").style.display = "none";
+      }
+    }
+    else if (Username === "Josh Doering")
+    {
+      document.getElementById("ProfileDescription").innerHTML = "Take Epic Chances! <br>\
+      co-founder of SeedSlide";
+      if (document.getElementById("Profilehr2").style.float === "left")
+        {
+          document.getElementById("ProjectsInProfileJD").style.display = "none";
+          document.getElementById("PhotosInProfileJD").style.display = "block";
+        }
+      else
+      {
+        document.getElementById("ProjectsInProfileJD").style.display = "block";
+        document.getElementById("PhotosInProfileJD").style.display = "none";
+      }
+    }
+
+    ////putting the info in////
+    document.getElementById("OtherNameIs").innerHTML = Username;
+
+    document.getElementById("real7").style.display = "none";
+    document.getElementById("real9").style.display = "block";
+  }
+
+
+  appns.ProjectAway = function (ev)
+  { var Town = ev.target.innerHTML;
+    ProjectName = document.getElementsByClassName("ProjectName20");
+    ProjectDescp = document.getElementsByClassName("ProjectDescp20");
+    NGO = document.getElementsByClassName("NGO2");
+    Reviews = document.getElementsByClassName("Reviews2");
+    Photos = document.getElementsByClassName("Photos2");
+    espaco0 = document.getElementsByClassName("espaco20");
+    espaco1 = document.getElementsByClassName("espaco22");
+    espaco2 = document.getElementsByClassName("espaco32");
+    espaco3 = document.getElementsByClassName("espaco42");
+    width0 = document.getElementsByClassName("NGOReviewPhoto20");
+    width1 = document.getElementsByClassName("NGOReviewPhoto22");
+    width2 = document.getElementsByClassName("NGOReviewPhoto32");
+    width3 = document.getElementsByClassName("NGOReviewPhoto42");
+    //////
+    if (Town === "Bogota")
+    {
+      ProjectName[0].innerHTML = "Action for Poverty";
+      ProjectName[1].innerHTML = "Water 4 Bogotá";
+      ProjectName[2].innerHTML = "Inclusive Tennis";
+      ProjectName[3].innerHTML = "Clean Alcala";
+      //////////
+      NGO[0].innerHTML = "AAP";
+        for (var i = 0; i < 3; i++)
+          {
+            espaco0[i].style.padding = "0% 3%";
+            width0[0].style.width = "85%";
+          }
+      NGO[1].innerHTML = "Water 4";
+        for (var i = 0; i < 3; i++)
+          {
+            espaco1[i].style.padding = "0% 3%";
+            width1[0].style.width = "91%";
+          }
+      NGO[2].innerHTML = "Tenis+";
+        for (var i = 0; i < 3; i++)
+          {
+            espaco2[i].style.padding = "0% 2%";
+            width2[0].style.width = "92%";
+          }
+      NGO[3].innerHTML = "Limpia Capital";
+        for (var i = 0; i < 3; i++)
+          {
+            espaco3[i].style.padding = "0% 1%";
+            width3[0].style.width = "93%";
+          }
+      //////////
+      Reviews[0].innerHTML = "17";
+      Reviews[1].innerHTML = "23";
+      Reviews[2].innerHTML = "12";
+      Reviews[3].innerHTML = "9";
+      //////////
+      Photos[0].innerHTML = "42";
+      Photos[1].innerHTML = "9";
+      Photos[2].innerHTML = "none";
+      Photos[3].innerHTML = "13";
+      //////////
+      ProjectDescp[0].innerHTML = "The project's objective is to give food,\
+      supplies, and company to homeless people.\
+      Action Against Poverty takes\
+      place in Ciudad Bolivar and its objective...";
+      ProjectDescp[1].innerHTML = "Water 4 Bogota is a project that teaches\
+      safety water procedures for people in the\
+      poor south area of Bogota. The project\
+      is a weekly class on Saturdays...";
+      ProjectDescp[2].innerHTML = "Inclusive Tennis is a project that every\
+      Friday takes kids from public\
+      to a club for a free Tennis\
+      lessons. THe idea is to show the\
+      kids the importnce of sports...";
+      ProjectDescp[3].innerHTML = "Clean Alcala is a simple project that\
+      invites travelers to clean the Alcala\
+      park every wednesday afternoon.\
+      Alcala park is located...";
+    }
+    else if (Town === "Sioux City")
+        {
+          ProjectName[0].innerHTML = "Campus Kitchen";
+          ProjectName[1].innerHTML = "Recycling Day";
+          ProjectName[2].innerHTML = "Retirement Visit";
+          ProjectName[3].innerHTML = "Play with the Kids";
+          //////////
+          NGO[0].innerHTML = "Morningside";
+            for (var i = 0; i < 3; i++)
+              {
+                espaco0[i].style.padding = "0% 1.5%";
+                width0[0].style.width = "90%";
+              }
+          NGO[1].innerHTML = "Sustainable SXC";
+              for (var i = 0; i < 3; i++)
+                {
+                  espaco1[i].style.padding = "0% 0%";
+                  width1[0].style.width = "94%";
+                }
+          NGO[2].innerHTML = "Sioux City GO";
+            for (var i = 0; i < 3; i++)
+              {
+                espaco2[i].style.padding = "0% 1.5%";
+                width2[0].style.width = "93%";
+              }
+          NGO[3].innerHTML = "Sioux City GO";
+            for (var i = 0; i < 3; i++)
+              {
+                espaco3[i].style.padding = "0% 1%";
+                width3[0].style.width = "93%";
+              }
+          //////////
+          Reviews[0].innerHTML = "8";
+          Reviews[1].innerHTML = "22";
+          Reviews[2].innerHTML = "3";
+          Reviews[3].innerHTML = "18";
+          //////////
+          Photos[0].innerHTML = "6";
+          Photos[1].innerHTML = "18";
+          Photos[2].innerHTML = "11";
+          Photos[3].innerHTML = "31";
+          //////////
+          ProjectDescp[0].innerHTML = "The project takes left-overs\
+          from the cafeteria to a local church\
+          to feed homeless people \
+          Every Monday...";
+          ProjectDescp[1].innerHTML = "This project, that started in Morningside\
+          College, consists on knocking\
+          on people's door every sunday night to\
+          collect recycling materials...";
+          ProjectDescp[2].innerHTML = "The Sioux City retirement house \
+          takes volunteers to play and share\
+          stories with the residents of the house.\
+          Every Friday afternoon...";
+          ProjectDescp[3].innerHTML = "The Sioux City Go organization \
+          organizaes a monthly play around with the kids from public\
+          schools in town. The idea of the project is to\
+          teach the kids valueable things and...";
+        }
+    else if (Town === "Brasília")
+          {
+            ProjectName[0].innerHTML = "Ismael House";
+            ProjectName[1].innerHTML = "Clean Esplanada";
+            ProjectName[2].innerHTML = "Donate for Ceilandia";
+            ProjectName[3].innerHTML = "Teach in Parque da Cidade";
+            //////////
+            NGO[0].innerHTML = "Laços da Alegria";
+              for (var i = 0; i < 3; i++)
+                {
+                  espaco0[i].style.padding = "0% 0.2%";
+                  width0[0].style.width = "95%";
+                }
+            NGO[1].innerHTML = "Bsb Verde";
+              for (var i = 0; i < 3; i++)
+                {
+                  espaco1[i].style.padding = "0% 1.5%";
+                  width1[0].style.width = "90%";
+                }
+            NGO[2].innerHTML = "Bsb Verde";
+              for (var i = 0; i < 3; i++)
+                {
+                  espaco2[i].style.padding = "0% 1%";
+                  width2[0].style.width = "90%";
+                }
+            NGO[3].innerHTML = "Educa Brasília";
+              for (var i = 0; i < 3; i++)
+                {
+                  espaco3[i].style.padding = "0% 0.5%";
+                  width3[0].style.width = "95%";
+                }
+            //////////
+            Reviews[0].innerHTML = "25";
+            Reviews[1].innerHTML = "31";
+            Reviews[2].innerHTML = "4";
+            Reviews[3].innerHTML = "16";
+            //////////
+            Photos[0].innerHTML = "19";
+            Photos[1].innerHTML = "24";
+            Photos[2].innerHTML = "none";
+            Photos[3].innerHTML = "21";
+            //////////
+            ProjectDescp[0].innerHTML = "Every Sunday a group of students\
+            organizes a visit to the orphanage Casa Ismael\
+            to play and share with the kids. The main idea \
+            of the project is...";
+            ProjectDescp[1].innerHTML = "One of the most iconic places of\
+            Brasilia is The Esplanada dos Ministerios \
+            This project organizes a monthly clean up \
+            of this iconical place...";
+            ProjectDescp[2].innerHTML = "Ceilandia is a vulnerable region\
+            around Brasilia. The objective of this project is to\
+            gather donations of any kind to take to families\
+            in Ceilandia...";
+            ProjectDescp[3].innerHTML = "Every 15 days, a massive teaching\
+            session occurs in Parque da Cidade. People with any type\
+            of knowledge teach the public in sessions of 45 minutes...";
+          }
+    else if (Town === "Medellín")
+          {
+            ProjectName[0].innerHTML = "Medellín is Peace";
+            ProjectName[1].innerHTML = "Conscious Comuna 13";
+            ProjectName[2].innerHTML = "Multi Sports Medellín";
+            ProjectName[3].innerHTML = "Victims of Antioquia";
+            //////////
+            NGO[0].innerHTML = "Colombia PAZ";
+              for (var i = 0; i < 3; i++)
+                {
+                  espaco0[i].style.padding = "0% 1%";
+                  width0[0].style.width = "95%";
+                }
+            NGO[1].innerHTML = "Por Medellin";
+              for (var i = 0; i < 3; i++)
+                {
+                  espaco1[i].style.padding = "0% 1.5%";
+                  width1[0].style.width = "95%";
+                }
+            NGO[2].innerHTML = "Por Medellin";
+              for (var i = 0; i < 3; i++)
+                {
+                  espaco2[i].style.padding = "0% 1.5%";
+                  width2[0].style.width = "95%";
+                }
+            NGO[3].innerHTML = "Colombia PAZ";
+              for (var i = 0; i < 3; i++)
+                {
+                  espaco3[i].style.padding = "0% 1%";
+                  width3[0].style.width = "95%";
+                }
+            //////////
+            Reviews[0].innerHTML = "43";
+            Reviews[1].innerHTML = "21";
+            Reviews[2].innerHTML = "16";
+            Reviews[3].innerHTML = "28";
+            //////////
+            Photos[0].innerHTML = "88";
+            Photos[1].innerHTML = "37";
+            Photos[2].innerHTML = "12";
+            Photos[3].innerHTML = "11";
+            //////////
+            ProjectDescp[0].innerHTML = "This projects wants to\
+            change the vision of Medellín as a\
+            violent city. Colombia PAZ organizaes\
+            tours around places of the city to show tourists\
+            how the the city changed...";
+            ProjectDescp[1].innerHTML = "Once known for the violence,\
+            this project wants to make the Comuna the most sustainable\
+            region of Medellín by teaching sustainability and...";
+            ProjectDescp[2].innerHTML = "In the park Bolivar, every Sunday\
+            morning, a multi sports lesson is teached to the community.\
+            From soccer to Capoeira, various sports...";
+            ProjectDescp[3].innerHTML = "The conflict in Colombia heavily\
+            hurt Antioquia Region. This project treats the victims and\
+            tries to use various skillsets of travelers to help... ";
+          }
+    else if (Town === "Cartagena")
+          {
+            ProjectName[0].innerHTML = "Agua para Manaure";
+            ProjectName[1].innerHTML = "Cartagena Empreendedora";
+            ProjectName[2].innerHTML = "Limpia Boca Grande";
+            ProjectName[3].innerHTML = "Cartagena Integrada";
+            //////////
+            NGO[0].innerHTML = "Water 4";
+              for (var i = 0; i < 3; i++)
+                {
+                  espaco0[i].style.padding = "0% 3%";
+                  width0[0].style.width = "87%";
+                }
+            NGO[1].innerHTML = "MunEmpree";
+              for (var i = 0; i < 3; i++)
+                {
+                  espaco1[i].style.padding = "0% 2%";
+                  width1[0].style.width = "93%";
+                }
+            NGO[2].innerHTML = "Cartagena Culta";
+              for (var i = 0; i < 3; i++)
+                {
+                  espaco2[i].style.padding = "0% 0%";
+                  width2[0].style.width = "95%";
+                }
+            NGO[3].innerHTML = "Cartagena Culta";
+              for (var i = 0; i < 3; i++)
+                {
+                  espaco3[i].style.padding = "0% 0%";
+                  width3[0].style.width = "95%";
+                }
+            //////////
+            Reviews[0].innerHTML = "3";
+            Reviews[1].innerHTML = "9";
+            Reviews[2].innerHTML = "14";
+            Reviews[3].innerHTML = "12";
+            //////////
+            Photos[0].innerHTML = "1";
+            Photos[1].innerHTML = "6";
+            Photos[2].innerHTML = "11";
+            Photos[3].innerHTML = "7";
+            //////////
+            ProjectDescp[0].innerHTML = "In the North of Colombia,\
+            the area of Manaure created a destilation project\
+            to collect water from the sea. The project needs\
+            technical engineering knowledge...";
+            ProjectDescp[1].innerHTML = "This project teaches\
+            entrepreneurship lessons to the peddlers of the city.\
+            The idea is to enhance...";
+            ProjectDescp[2].innerHTML = "Boca Grande is one of the most iconic\
+            beaches of Cartagena and yet, one of the dirtiest. This project\
+            organizes a monthly clean up to raise awareness...";
+            ProjectDescp[3].innerHTML = "This project promotes cultural\
+            exchange between tourists and locals.\
+            The idea is that both sides can learn more about\
+            the other's culture...";
+          }
+
+    document.getElementById("locationP2").innerHTML = Town;
+    ///////////
+    document.getElementById("real9").style.display = "none";
+    document.getElementById("real10").style.display = "block";
+    ///////////
+  }
+
+
+  appns.GoONGProfile = function (ev)
+  { var ONGName,
+    Description = document.getElementById("DescriptionB");
+    NameONG = document.getElementsByClassName("NameONG");
+    ONGName1 = document.getElementsByClassName("NGO");
+    ONGName2 = document.getElementsByClassName("NGO2");
+    ONGId = ev.target.id;
+
+    /////Grabbing the name//////
+    if (ONGId === "NGO0" || ONGId === "NGO00")
+    {
+      ONGName = ONGName1[0].innerHTML;
+    }
+    else if (ONGId === "NGO1" || ONGId === "NGO11")
+    {
+      ONGName = ONGName1[1].innerHTML;
+    }
+    else if (ONGId === "NGO2" || ONGId === "NGO22")
+    {
+      ONGName = ONGName1[2].innerHTML;
+    }
+    else if (ONGId === "NGO3" || ONGId === "NGO33")
+    {
+      ONGName = ONGName1[3].innerHTML;
+    }
+    else if (ONGId === "NGO4" || ONGId === "NGO44")
+    {
+      ONGName = ONGName2[0].innerHTML;
+    }
+    else if (ONGId === "NGO5" || ONGId === "NGO55")
+    {
+      ONGName = ONGName2[1].innerHTML;
+    }
+    else if (ONGId === "NGO6" || ONGId === "NGO66")
+    {
+      ONGName = ONGName2[2].innerHTML;
+    }
+    else if (ONGId === "NGO7" || ONGId === "NGO77")
+    {
+      ONGName = ONGName2[3].innerHTML;
+    }
+
+    /////Putting the Name on the page////////
+    for (var i = 0; i < NameONG.length; i++)
+      {
+        NameONG[i].innerHTML = ONGName;
+      }
+    //////////////
+    var display = document.getElementsByClassName("AProfileProjectCreator2");
+    place = document.getElementsByClassName("ProfileLocation2");
+    country = document.getElementsByClassName("Country");
+    proname = document.getElementsByClassName("ProjectName600");
+    descriptionp = document.getElementsByClassName("ProjectDescp600");
+    foto = document.getElementsByClassName("APhotoONG");
+
+    for (var i = 0; i < 16; i++)
+    {
+      foto[i].style.display = "none";
+    }
+    //////Putting Rest of Info ////////
+    if (ONGName === "AAP")
+    {
+      Description.innerHTML = "AAP stands for Action Against Poverty. We are an NGO with initiatives to fight poverty worldwide. Our headquarters in Colombia are located in Bogota, where we work to initiate projects in different regions of Colombia to fight poverty. We currently have only one project in Bogota, but we are working to expand our impact to other regions of the country.";
+      display[0].style.display = "block";
+      display[1].style.display = "none";
+      place[0].innerHTML = "Bogota,"
+      country[0].innerHTML = " Colombia";
+      proname[0].innerHTML = "Action for Poverty";
+      descriptionp[0].innerHTML = "The project's objective is to give food, supplies, and company to homeless people. Action Against Poverty takes place in Ciudad Bolivar and its objective...";
+      for (var i = 0; i < 6; i++)
+      {
+        foto[i].style.display = "block";
+      }
+    }
+    else if (ONGName === "Water 4")
+    {
+      Description.innerHTML = "Water 4 is an NGO acting in Colombia with the core belief that water should be a right for all. We promote various projects around the country to raise awareness on water conservation, and take water to vulnerable regions of the country. Come help us!";
+      display[0].style.display = "block";
+      display[1].style.display = "block";
+      place[0].innerHTML = "Bogota,";
+      place[1].innerHTML = "Cartagena,";
+      country[0].innerHTML = " Colombia";
+      country[1].innerHTML = " Colombia";
+      proname[0].innerHTML = "Water 4 Bogotá";
+      proname[1].innerHTML = "Agua Para Manaure";
+      descriptionp[0].innerHTML = "Water 4 Bogota is a project that teaches safety water procedures for people in the poor south area of Bogota. The project is a weekly class on Saturdays...";
+      descriptionp[1].innerHTML = "In the North of Colombia, the area of Manaure created a destilation project to collect water from the sea. The project needs technical engineering knowledge...";
+      for (var i = 0; i < 10; i++)
+      {
+        foto[i].style.display = "block";
+      }
+    }
+    else if (ONGName === "Tenis+")
+    {
+      Description.innerHTML = "We are an athlete driven NGO, where entrepreneurial athletes initiate social projects to promote education and cultural inclusion through sports. Our main focus is Tennis, and we strive to make this sport as inclusive as possible, giving vulnerable kids the opportunity to learn sports lessons for life.";
+      display[0].style.display = "block";
+      display[1].style.display = "none";
+      place[0].innerHTML = "Bogota,";
+      country[0].innerHTML = " Colombia";
+      proname[0].innerHTML = "Inclusive Tennis";
+      descriptionp[0].innerHTML = "Inclusive Tennis is a project that every Friday takes kids from public to a club for a free Tennis lessons. THe idea is to show the kids the importnce of sports...";
+      for (var i = 0; i < 8; i++)
+      {
+        foto[i].style.display = "block";
+      }
+    }
+    else if (ONGName === "Limpia Capital")
+    {
+      Description.innerHTML = "We are an NGO which is main focus is to make our Colombian Capital as clean and free of garbage as possible. The government sometimes can’t effectively handle the amount of garbage in some areas of the city, so we promote projects to clean these areas and raise environmental awareness.";
+      display[0].style.display = "block";
+      display[1].style.display = "none";
+      place[0].innerHTML = "Bogota,";
+      country[0].innerHTML = " Colombia";
+      proname[0].innerHTML = "Clean Alcala";
+      descriptionp[0].innerHTML = "Clean Alcala is a simple project that invites travelers to clean the Alcala park every wednesday afternoon. Alcala park is located...";
+      for (var i = 0; i < 8; i++)
+      {
+        foto[i].style.display = "block";
+      }
+    }
+    else if (ONGName === "Morningside")
+    {
+      Description.innerHTML = "Morningside College is a well know higher lever institution in the Midwest. However, thanks to the exhaustive efforts of some students, Morningside College created an organizational branch to exclusively create and promote social impact projects in Siouxland area. We promote environmental, cultural, and social projects to enhance the life in our community. Morningside College is the first College in the country to have an organization branch exclusively dedicated to social projects.";
+      display[0].style.display = "block";
+      display[1].style.display = "none";
+      place[0].innerHTML = "Sioux City,";
+      country[0].innerHTML = " USA";
+      proname[0].innerHTML = "Campus Kitchen";
+      descriptionp[0].innerHTML = "The project takes left-overs from the cafeteria to a local church to feed homeless people Every Monday...";
+      for (var i = 0; i < 4; i++)
+      {
+        foto[i].style.display = "block";
+      }
+    }
+    else if (ONGName === "Sustainable SXC")
+    {
+      Description.innerHTML = "Our main objective is to maintain Sioux City a sustainable city as it grows with time. Sustainable SXC was the responsible for pushing to the local government to approve the carbon tax pilot project to our local companies. We strive to engage our community in sustainable initiatives to start making a real environmental difference in the Midwest.";
+      display[0].style.display = "block";
+      display[1].style.display = "none";
+      place[0].innerHTML = "Sioux City,";
+      country[0].innerHTML = " USA";
+      proname[0].innerHTML = "Recycling Day";
+      descriptionp[0].innerHTML = "This project, that started in Morningside College, consists on knocking on people's door every sunday night to collect recycling materials...";
+      for (var i = 0; i < 6; i++)
+      {
+        foto[i].style.display = "block";
+      }
+    }
+    else if (ONGName === "Sioux City GO")
+    {
+      Description.innerHTML = "Sioux City GO is a business organization with the objective of keep our professionals in our community. Sioux City GO created a social enterprise branch, and started using our influence and network to create and promote projects to impact our community in a positive way.";
+      display[0].style.display = "block";
+      display[1].style.display = "block";
+      place[0].innerHTML = "Sioux City,";
+      place[1].innerHTML = "Sioux CIty,";
+      country[0].innerHTML = " USA";
+      country[1].innerHTML = " USA";
+      proname[0].innerHTML = "Retirement Visit";
+      proname[1].innerHTML = "Play with the Kids";
+      descriptionp[0].innerHTML = "The Sioux City retirement house takes volunteers to play and share stories with the residents of the house. Every Friday afternoon...";
+      descriptionp[1].innerHTML = "The Sioux City Go organization organizaes a monthly play around with the kids from public schools in town. The idea of the project is to teach the kids valueable things and...";
+      for (var i = 0; i < 8; i++)
+      {
+        foto[i].style.display = "block";
+      }
+    }
+    else if (ONGName === "Laços da Alegria")
+    {
+      Description.innerHTML = "We are a student-driven organization, which promotes simple projects for students to get socially involve and impact the vulnerable community of Brasilia. We organize visits to poor institutions in the city so our students can share with these people and also learn from their world vision. We spread love across Brasilia.";
+      display[0].style.display = "block";
+      display[1].style.display = "none";
+      place[0].innerHTML = "Brasília,";
+      country[0].innerHTML = " Brasil";
+      proname[0].innerHTML = "Ismael House";
+      descriptionp[0].innerHTML = "Every Sunday a group of students organizes a visit to the orphanage Casa Ismael to play and share with the kids. The main idea of the project is...";
+      for (var i = 0; i < 10; i++)
+      {
+        foto[i].style.display = "block";
+      }
+    }
+    else if (ONGName === "Bsb Verde")
+    {
+      Description.innerHTML = "Bsb Verde is the biggest environmentally focused NGO in the country. Our main goal is to promote any type of project that makes the community of Brasilia more sustainable. Through our projects we promote environmental engagement for all the population of Brasilia. We also create campaigns to pressure the government to approve sustainable policies and take action on climate issues.";
+      display[0].style.display = "block";
+      display[1].style.display = "block";
+      place[0].innerHTML = "Brasília,";
+      place[1].innerHTML = "Brasília,";
+      country[0].innerHTML = " Brasil";
+      country[1].innerHTML = " Brasil";
+      proname[0].innerHTML = "Clean Esplanada";
+      proname[1].innerHTML = "Donate for Ceilandia";
+      descriptionp[0].innerHTML = "One of the most iconic places of Brasilia is The Esplanada dos Ministerios This project organizes a monthly clean up of this iconical place...";
+      descriptionp[1].innerHTML = "Ceilandia is a vulnerable region around Brasilia. The objective of this project is to gather donations of any kind to take to families in Ceilandia...";
+      for (var i = 0; i < 16; i++)
+      {
+        foto[i].style.display = "block";
+      }
+    }
+    else if (ONGName === "Educa Brasília")
+    {
+      Description.innerHTML = "Brasilia is a city with a major social inequality. This social inequality affects education, not allowing a lot of people to have access to high quality education in the city. Educa Brasilia is an independent NGO that promotes projects to give access to high level education to anyone. We promote big learning sessions in different areas of the city where anyone can teach and learn from a big variety of subjects.";
+      display[0].style.display = "block";
+      display[1].style.display = "none";
+      place[0].innerHTML = "Brasília,";
+      country[0].innerHTML = " Brasil";
+      proname[0].innerHTML = "Teach in Parque da Cidade";
+      descriptionp[0].innerHTML = "Every 15 days, a massive teaching session occurs in Parque da Cidade. People with any type of knowledge teach the public in sessions of 45 minutes...";
+      for (var i = 0; i < 8; i++)
+      {
+        foto[i].style.display = "block";
+      }
+    }
+    else if (ONGName === "Colombia PAZ")
+    {
+      Description.innerHTML = "Colombia PAZ is the biggest independent organization acting to enhance the peace process of Colombia. We promote projects to attend the victims of the conflict, raise awareness of normal people about the peace, and prepare involved people for life in society. With the help of travelers from different areas, we want to bring an international approach to the peace process and show to the rest of the world that Colombia es PAZ!";
+      display[0].style.display = "block";
+      display[1].style.display = "block";
+      place[0].innerHTML = "Medellín,";
+      place[1].innerHTML = "Medellín,";
+      country[0].innerHTML = " Colombia";
+      country[1].innerHTML = " Colombia";
+      proname[0].innerHTML = "Medellín is Peace";
+      proname[1].innerHTML = "Victims of Antioquia";
+      descriptionp[0].innerHTML = "This projects wants to change the vision of Medellín as a violent city. Colombia PAZ organizaes tours around places of the city to show tourists how the the city changed...";
+      descriptionp[1].innerHTML = "The conflict in Colombia heavily hurt Antioquia Region. This project treats the victims and tries to use various skillsets of travelers to help...";
+      for (var i = 0; i < 10; i++)
+      {
+        foto[i].style.display = "block";
+      }
+    }
+    else if (ONGName === "Por Medellin")
+    {
+      Description.innerHTML = "We are an NGO founded after the drugs conflict finished. We love our city of Medellin and work in various areas to enhance our community. Por Medellin has the main objective of promote projects to overcome the consequences of the conflict our city faced, and raise awareness of the international community about the real face of Medellin.";
+      display[0].style.display = "block";
+      display[1].style.display = "block";
+      place[0].innerHTML = "Medellín,";
+      place[1].innerHTML = "Medellín,";
+      country[0].innerHTML = " Colombia";
+      country[1].innerHTML = " Colombia";
+      proname[0].innerHTML = "Conscious Comuna 13";
+      proname[1].innerHTML = "Multi Sports Medellín";
+      descriptionp[0].innerHTML = "Once known for the violence, this project wants to make the Comuna the most sustainable region of Medellín by teaching sustainability and...";
+      descriptionp[1].innerHTML = "In the park Bolivar, every Sunday morning, a multi sports lesson is teached to the community. From soccer to Capoeira, various sports...";
+      for (var i = 0; i < 12; i++)
+      {
+        foto[i].style.display = "block";
+      }
+    }
+    else if (ONGName === "MunEmpree")
+    {
+      Description.innerHTML = "We are the biggest social entrepreneurship NGO in Latin America. Our main goal is to educate and empower vulnerable communities through entrepreneurship. We want to take the magic of entrepreneurship to every community in Latin America and show them a way to empower their life and build a better future for themselves and their families.";
+      display[0].style.display = "block";
+      display[1].style.display = "none";
+      place[0].innerHTML = "Cartagena,";
+      country[0].innerHTML = "Colombia";
+      proname[0].innerHTML = "Cartagena Empreendedora";
+      descriptionp[0].innerHTML = "This project teaches entrepreneurship lessons to the peddlers of the city. The idea is to enhance...";
+      for (var i = 0; i < 6; i++)
+      {
+        foto[i].style.display = "block";
+      }
+    }
+    else if (ONGName === "Cartagena Culta")
+    {
+      Description.innerHTML = "Cartagena Culta is a regional NGO which it’s main focus is to promote projects in different areas to make Cartagena a more conscious city. We use the touristic attractiveness of the city to educate our community with the multiple world visions of tourists. We make a Cartagena an international community and use these world visions to enhance the life of the city.";
+      display[0].style.display = "block";
+      display[1].style.display = "block";
+      place[0].innerHTML = "Cartagena,";
+      place[1].innerHTML = "Cartagena,";
+      country[0].innerHTML = " Colombia";
+      country[1].innerHTML = " Colombia";
+      proname[0].innerHTML = "Limpia Boca Grande";
+      proname[1].innerHTML = "Cartagena Integrada";
+      descriptionp[0].innerHTML = "Boca Grande is one of the most iconic beaches of Cartagena and yet, one of the dirtiest. This project organizes a monthly clean up to raise awareness...";
+      descriptionp[1].innerHTML = "This project promotes cultural exchange between tourists and locals. The idea is that both sides can learn more about the other's culture...";
+      for (var i = 0; i < 4; i++)
+      {
+        foto[i].style.display = "block";
+      }
+    }
+
+    /////Displaying Next Page/////////
+    if (document.getElementById("real8").style.display === "block")
+    {
+      document.getElementById("real8").style.display = "none";
+      document.getElementById("real11").style.display = "block";
+      //////////
+      document.getElementById("IconesONG").src = "Icones1.jpg";
+      document.getElementById("IconesONG").dataset.pag = "real8"
+    }
+    else if (document.getElementById("real10").style.display === "block")
+    {
+      document.getElementById("real10").style.display = "none";
+      document.getElementById("real11").style.display = "block";
+      //////////
+      document.getElementById("IconesONG").src = "Icones2.jpg";
+      document.getElementById("IconesONG").dataset.pag = "real10"
+    }
+
+  }
+
+  /////In A Project Page///////
+  appns.DisplayPrDescription = function ()
+  {
+    document.getElementById("TheActualDescription").style.display = "block";
+    document.getElementById("PhotosInAProject").style.display = "none";
+    var Reviews = document.getElementsByClassName("NameofTheUser");
+        hr = document.getElementsByClassName("reviewshr");
+        for (var i = 0; i < hr.length; i++)
+          {
+            hr[i].style.display = "none";
+          }
+        for (var i = 0; i < Reviews.length; i++)
+          {
+            Reviews[i].style.display = "none";
+          }
+
+    //style//
+    document.getElementById("AProjectDescription").style.fontWeight = "bold";
+    document.getElementById("AProjectReviews").style.fontWeight = "normal";
+    document.getElementById("AProjectsPhotos").style.fontWeight = "normal";
+    document.getElementById("Projecthr1").style.float = "right";
+    document.getElementById("Projecthr2").style.float = "right";
+  }
+  appns.DisplayPrReviews = function ()
+  {
+    document.getElementById("TheActualDescription").style.display = "none";
+    document.getElementById("PhotosInAProject").style.display = "none";
+    var Reviews = document.getElementsByClassName("NameofTheUser");
+        hr = document.getElementsByClassName("reviewshr");
+        for (var i = 0; i < hr.length; i++)
+          {
+            hr[i].style.display = "block";
+          }
+        for (var i = 0; i < Reviews.length; i++)
+          {
+
+            Reviews[i].style.display = "block";
+          }
+    //style//
+    document.getElementById("AProjectDescription").style.fontWeight = "normal";
+    document.getElementById("AProjectReviews").style.fontWeight = "bold";
+    document.getElementById("AProjectsPhotos").style.fontWeight = "normal";
+    document.getElementById("Projecthr1").style.float = "right";
+    document.getElementById("Projecthr2").style.float = "left";
+  }
+  appns.DisplayPrPhotos = function ()
+  {
+    document.getElementById("TheActualDescription").style.display = "none";
+    document.getElementById("PhotosInAProject").style.display = "block";
+    var Reviews = document.getElementsByClassName("NameofTheUser");
+        hr = document.getElementsByClassName("reviewshr");
+        for (var i = 0; i < hr.length; i++)
+          {
+            hr[i].style.display = "none";
+          }
+        for (var i = 0; i < Reviews.length; i++)
+          {
+            Reviews[i].style.display = "none";
+          }
+    //style//
+    document.getElementById("AProjectDescription").style.fontWeight = "normal";
+    document.getElementById("AProjectReviews").style.fontWeight = "normal";
+    document.getElementById("AProjectsPhotos").style.fontWeight = "bold";
+    document.getElementById("Projecthr1").style.float = "left";
+    document.getElementById("Projecthr2").style.float = "left";
+  }
+
+  //// Displaying A Project ///////
+  appns.DisplayAProject = function ()
+  {
+    var real7 = document.getElementById("real7");
+        real8 = document.getElementById("real8");
+        real9 = document.getElementById("real9");
+        real10 = document.getElementById("real10");
+        real11 = document.getElementById("real11");
+        data = document.getElementById("IconesONG").dataset.pag;
+    if (real7.style.display === "block")
+    {
+      document.getElementById("IconesAProject").src = "Icones2.jpg";
+      document.getElementById("IconesAProject").dataset.pagPr = "real7"
+    }
+    else if (real9.style.display === "block")
+    {
+      document.getElementById("IconesAProject").src = "Icones2.jpg";
+      document.getElementById("IconesAProject").dataset.pagPr = "real9"
+    }
+    else if (real10.style.display === "block")
+    {
+      document.getElementById("IconesAProject").src = "Icones2.jpg";
+      document.getElementById("IconesAProject").dataset.pagPr = "real10"
+    }
+    else if (real8.style.display === "block")
+    {
+      document.getElementById("IconesAProject").src = "Icones1.jpg";
+      document.getElementById("IconesAProject").dataset.pagPr = "real8"
+    }
+    else if (data === "real8")
+    {
+      document.getElementById("IconesAProject").src = "Icones1.jpg";
+      document.getElementById("IconesAProject").dataset.pagPr = "real11"
+    }
+    else if (data === "real10")
+    {
+      document.getElementById("IconesAProject").src = "Icones2.jpg";
+      document.getElementById("IconesAProject").dataset.pagPr = "real11"
+    }
+    real7.style.display = "none";
+    real8.style.display = "none";
+    real9.style.display = "none";
+    real10.style.display = "none";
+    real11.style.display = "none";
+    real12.style.display = "block";
+  }
+  //// Back from A Project //////
+  appns.BackFromAProject = function ()
+  {
+    var data = document.getElementById("IconesAProject").dataset.pagPr;
+    document.getElementById("real12").style.display = "none";
+    if (data === "real7")
+    {
+      document.getElementById("real7").style.display = "block"
+    }
+    else if (data === "real8")
+    {
+      document.getElementById("real8").style.display = "block"
+    }
+    else if (data === "real9")
+    {
+      document.getElementById("real9").style.display = "block"
+    }
+    else if (data === "real10")
+    {
+      document.getElementById("real10").style.display = "block"
+    }
+    else if (data === "real11")
+    {
+      document.getElementById("real11").style.display = "block"
+    }
+  }
+  /*****************
+  Initialization
+  ******************/
+  appns.init = function ()
+  {
+    document.getElementById("real1").style.display = "block";
+    for (var i = 2; i < 13; i++)
+      { var id = "real" + i;
+      document.getElementById(id).style.display = "none";
+      }
+    document.getElementById("searchbox").value = "Search...";
+    document.getElementById("YourMessage").value = "Type a Message...";
+  }
+
+  /*****************
+  WINDOW ONLOAD PART
+  ******************/
+  window.onload = function()
+  {
+    appns.init();
+    //////Grabbing info//////////
+    document.getElementById("regbut").addEventListener('click', appns.Registration);
+    document.getElementById("Continue").addEventListener('click', appns.DefineTown);
+    document.getElementById("LogIn").addEventListener('click', appns.LogIn)
+    document.getElementById("Facebook").addEventListener('click', appns.Facebook);
+    document.getElementById("OrFacebook").addEventListener('click', appns.Facebook);
+    ///////Sub Pages ////////
+    for (var i = 0; i < suggesteduser.length; i++)
+    {
+      suggesteduser[i].addEventListener('click', appns.OtherUser);
+    }
+    //////details other profile///////
+    document.getElementById("PhotosProfile2").addEventListener('click', appns.DisplayPhotos2);
+    document.getElementById("ProjectsProfile2").addEventListener('click', appns.DisplayProjects2);
+    document.getElementById("BackArrow").addEventListener('click', appns.BackArrow);
+    //////going to new cities///////
+    for (var i = 0; i < ProjectLocation.length; i++)
+        {
+          ProjectLocation[i].addEventListener('click', appns.ProjectAway);
+        }
+        document.getElementById("BackArrow2").addEventListener('click', appns.BackArrow2);
+    ///////ONG Profile///////////////
+    for (var i = 0; i < ONGListener.length; i++)
+    {
+        ONGListener[i].addEventListener('click', appns.GoONGProfile);
+      }
+    document.getElementById("ONGPhotosProfile").addEventListener('click', appns.DisplayPhotosONG);
+    document.getElementById("ONGProjectsProfile").addEventListener('click', appns.DisplayProjectsONG);
+    document.getElementById("BackArrowONG").addEventListener('click', appns.GoBackONG);
+    ////////Navigation inside A Project////////
+    document.getElementById("AProjectDescription").addEventListener('click', appns.DisplayPrDescription);
+    document.getElementById("AProjectReviews").addEventListener('click', appns.DisplayPrReviews);
+    document.getElementById("AProjectsPhotos").addEventListener('click', appns.DisplayPrPhotos);
+    ///////Going to A Project Page/////////
+    var project = document.getElementsByClassName("project");
+        ProjectName = document.getElementsByClassName("ProjectName");
+        ProjectDescp = document.getElementsByClassName("ProjectDescp");
+    for (var i = 0; i < 4; i++)
+      {
+      ProjectName[i].addEventListener('click', appns.DisplayAProject);
+      ProjectDescp[i].addEventListener('click', appns.DisplayAProject);
+      project[i].addEventListener('click', appns.DisplayAProject);
+    }
+    for (var i = 0; i < 4; i++)
+      {
+        document.getElementsByClassName("suggestedproject")[i].addEventListener('click', appns.DisplayAProject);
+      }
+    var project2 = document.getElementsByClassName("project2");
+        ProjectName2 = document.getElementsByClassName("ProjectName2");
+        ProjectDescp2 = document.getElementsByClassName("ProjectDescp2");
+    for (var i = 0; i < 13; i++)
+      {
+        ProjectName2[i].addEventListener('click', appns.DisplayAProject);
+        ProjectDescp2[i].addEventListener('click', appns.DisplayAProject);
+      }
+    for (var i = 0; i < 15; i++)
+      {
+        project2[i].addEventListener('click', appns.DisplayAProject);
+      }
+    for (var i = 0; i < 2; i++)
+      {
+        document.getElementsByClassName("ProjectDescp600")[i].addEventListener('click', appns.DisplayAProject);
+        document.getElementsByClassName("ProjectName600")[i].addEventListener('click', appns.DisplayAProject);
+      }
+    var project20 = document.getElementsByClassName("project20");
+        ProjectName20 = document.getElementsByClassName("ProjectName20");
+        ProjectDescp20 = document.getElementsByClassName("ProjectDescp20");
+    for (var i = 0; i < 4; i++)
+      {
+        ProjectName20[i].addEventListener('click', appns.DisplayAProject);
+        ProjectDescp20[i].addEventListener('click', appns.DisplayAProject);
+        project20[i].addEventListener('click', appns.DisplayAProject);
+      }
+      /////Going Back from A Project Page//////////
+      document.getElementById("BackArrowAProject").addEventListener('click', appns.BackFromAProject);
+    ///////MESSAGE NAVIGATION//////
+    document.getElementById("HelpUs").addEventListener('click', appns.GoMessage);
+    document.getElementById("TheMessage").addEventListener('click', appns.GoMessage);
+    document.getElementById("BackMessage").addEventListener('click', appns.GoMessagePg);
+    document.getElementById("SendMessage").addEventListener('click', appns.SendMessage);
+    document.getElementById("YourMessage").addEventListener('keypress', appns.Provisional);
+    ///////Details//////
+    document.getElementById("YourMessage").addEventListener('focus', appns.FocusMessage, true);
+    document.getElementById("searchbox").addEventListener('focus', appns.FocusSearch, true);
+    document.getElementById("searchbox").addEventListener('blur', appns.BlurSearch, true);
+    /////Navigation Outside//////
+    document.getElementById("SignUp").addEventListener('click', appns.DisplaySignUp);
+    document.getElementById("log2").addEventListener('click', appns.DisplaySignUp);
+    document.getElementById("log").addEventListener('click', appns.DisplayLogin);
+    document.getElementById("GoBack").addEventListener('click', appns.init);
+    ///// MAIN NAVIGATION //////
+    document.getElementById("GoProjects1").addEventListener('click', appns.GoProjects); document.getElementById("GoProjects2").addEventListener('click', appns.GoProjects); document.getElementById("GoProjects3").addEventListener('click', appns.GoProjects); document.getElementById("GoProjects4").addEventListener('click', appns.GoProjects);
+    document.getElementById("GoSearch1").addEventListener('click', appns.GoSearch); document.getElementById("GoSearch2").addEventListener('click', appns.GoSearch); document.getElementById("GoSearch3").addEventListener('click', appns.GoSearch); document.getElementById("GoSearch4").addEventListener('click', appns.GoSearch);
+    document.getElementById("GoMj1").addEventListener('click', appns.GoMj); document.getElementById("GoMj2").addEventListener('click', appns.GoMj); document.getElementById("GoMj3").addEventListener('click', appns.GoMj); document.getElementById("GoMj4").addEventListener('click', appns.GoMj);
+    document.getElementById("GoProfile1").addEventListener('click', appns.GoProfile); document.getElementById("GoProfile2").addEventListener('click', appns.GoProfile); document.getElementById("GoProfile3").addEventListener('click', appns.GoProfile); document.getElementById("GoProfile4").addEventListener('click', appns.GoProfile);
+      //////details profile///////
+      document.getElementById("PhotosProfile").addEventListener('click', appns.DisplayPhotos);
+      document.getElementById("ProjectsProfile").addEventListener('click', appns.DisplayProjects);
+  }
+    </script>
+  </head>
+  <body>
+    <div id="SupremeMax">
+    <div id="cell">
+
+
+ <!********************************* LOGIN PART ********************************************!>
+      <!************
+      LOGIN FIRST PAGE
+      ************!>
+      <div id="real1">
+        <h1 id="welcome"> <span id="menorzinho">Welcome to</span> Travel&Do </h1>
+        <span id="vision"> Here we believe Traveling Can Change the World </span>
+
+        <button type="button" id="SignUp"> Sign Up </button><br>
+        <span id="or"><hr id="hrfltr"> or <hr id="hrfltl"></span><br>
+        <button type="button" id="Facebook"> Log in with Facebook </button>
+
+        <hr id="bothr">
+        <p id="bottom">
+          Already part of this movement? <span id="log"> Log in </span>
+        </p>
+      </div>
+      <!************
+      DONE WITH PAGE
+      ************!>
+
+
+          <!************
+          SIGN UP SUBPAGE
+          ************!>
+          <div id="real2">
+            <h1 id="welcome2"> <span id="menorzinho2">Welcome to</span> Travel&Do </h1>
+            <span id="vision2"> Here we believe Traveling Can Change the World </span>
+
+            <div id="register" class="textleft">
+              <div class="fltl">
+                Name: <br>
+                <input id="Name" type="text" size="12" maxlength="25">
+              </div>
+              <div class="fltl" id="LastNameDiv">
+                Last Name: <br>
+                <input id="LastName" type="text" size="12" maxlength="25">
+              </div>
+              <div class="clearbt">
+                Email: <br>
+                <input id="Email" type="text" size="25" maxlength="30">
+              </div>
+              <div class="clearbt">
+                Confirm Email: <br>
+                <input id="ConfirmEmail" type="text" size="25" maxlength="30">
+              </div>
+              <div class="clearbt">
+                Username: <br>
+                <input id="Username" type="text" size="20" maxlength="25">
+              </div>
+              <div class="clearbt">
+                Password: <br>
+                <input id="Password" type="password" size="15" maxlength="25">
+              </div>
+              <div class="clearbt">
+                Confirm Password: <br>
+                <input id="ConfirmPassword" type="password" size="15" maxlength="25">
+              </div>
+            </div>
+            <button type="button" id="regbut"> Register </button>
+            <br><br>
+            <span id="GoBack"> Go back to Main Page </span>
+
+          </div>
+          <!************
+          DONE WITH SUBPAGE
+          ************!>
+
+          <!************
+          LOG IN SUBPAGE
+          ************!>
+          <div id="real3">
+            <div id="loginfo">
+              <h1 id="welcome3">Travel&Do</h1>
+              <div id="LoginMesmo">
+                  Email or Username:<br>
+                  <input id="Usernamelog" type="text" size="25" maxlength="25">
+                <br><br>
+                  Password: <br>
+                  <input id="Passwordlog" type="password" size="25" maxlength="25">
+                <button type="button" id="LogIn"> Log in </button>
+              </div>
+            </div>
+
+            <button id="OrFacebook">
+              Login with Facebook
+            </button>
+
+            <hr id="bothr2">
+            <p id="bottom2">
+              Not a member yet? <span id="log2">Sign up</span>
+            </p>
+
+          </div>
+          <!************
+          DONE WITH SUBPAGE
+          ************!>
+
+ <!********************************* done ********************************************!>
+
+
+      <!************
+      DEFINE TOWN PAGE
+      ************!>
+      <div id="real4">
+        <p id="define">
+          Define your current town:
+        </p>
+
+        <select id="CurrentTown">
+          <option value=""> Select... </option>
+          <option value="Bogota"> Bogota </option>
+          <option value="Sioux City"> Sioux City </option>
+          <option value="Brasília"> Brasília </option>
+          <option value="Medellín"> Medellín </option>
+          <option value="Cartagena"> Cartagena </option>
+        </select>
+
+        <br>
+
+        <button type="button" id="Continue"> Continue </button>
+
+        <p class="normal" id="non">
+          Non of this information will be public unless you decide to share
+          it in your profile.
+        </p>
+      </div>
+      <!************
+      DONE WITH PAGE
+      ************!>
+
+
+
+
+ <!*************************************************************************************>
+                                     <!INSIDE PART>
+ <!*************************************************************************************>
+
+
+
+
+    <map name="iconesProfile">
+      <area shape="rect" coords="0,3,75,67" id="GoProjects1">
+      <area shape="rect" coords="80,3,155,67" id="GoSearch1">
+      <area shape="rect" coords="159,3,234,67" id="GoMj1">
+      <area shape="rect" coords="238,3,313,67" href="#Usernamedis">
+    </map>
+
+
+
+      <!*********************** FIRST PAGE - PROFILE PAGE ************************!>
+      <div id="real5">
+
+        <!****************** TELA *******************>
+        <div class="iconesfora">
+
+          <img class="back" src="invite2.jpg" alt="inviteicon">
+          <img id="dropProfile" class="drop" src="drop2.jpg" alt="dropmenu">
+
+          <div class="profilepic">
+            <img src="profile.jpg" alt="profilepic">
+          </div>
+          <div id="NameDescription">
+            <span id="Usernamedis" class="Usernameis"> </span>
+            <br>
+            Traveling Can Change the World
+          </div>
+          <button id="EditProfile" type="button"> Edit profile </button>
+
+          <hr class="margin0" size="2">
+            <span id="ProjectsProfile"class="fltl">Projects</span>
+            <div class="paudomeio" class="fltr"></div>
+            <span id="PhotosProfile" class="fltr">Photos</span>
+          <hr class="margin0" size="2" id="Profilehr">
+
+         <!*******projects********>
+          <p id="ProjectsProfileExp">
+            When you participate or create a project, it will automatically be listed here.
+          </p>
+         <!*********************>
+
+         <!*******photos********>
+         <p id="PhotosProfileExp">
+            When you post a picture, it will appear here.
+         </p>
+         <!********************>
+
+
+        </div>
+        <!*********************************************>
+
+        <img src="Icones4.jpg" width="316" height="70" alt="icones4" class="margin00" usemap="#iconesProfile">
+      </div>
+      <!**************************** DONE WITH PROFILE PAGE **************************!>
+
+
+
+
+
+
+
+      <map name="iconesMJ">
+        <area shape="rect" coords="0,3,75,67" id="GoProjects2">
+        <area shape="rect" coords="80,3,155,67" id="GoSearch2">
+        <area shape="rect" coords="159,3,234,67" href="#FotoDeCapa">
+        <area shape="rect" coords="238,3,313,67" id="GoProfile1">
+      </map>
+
+
+
+      <!*************************** SECOND PAGE - MESSAGING PAGE **********************!>
+      <div id="real6">
+
+        <!****************** TELA *******************>
+        <div id="MessageHeader">Messages
+        <img src="add2.png" id="NewConv">
+        </div>
+        <hr class="margin0" size="2">
+
+        <div class="iconesfora2">
+
+          <div id="TheMessage">
+            <div class="MessageUser">
+            </div>
+            <h3 class="MessagerName">Love Army</h3> <div class="NewMessage"></div>
+            <p class="MessageItself">
+               I am really interested on joining your...
+            </p>
+          </div>
+
+          <hr class="margin0 clearbt" id="Messagehr">
+
+        </div>
+        <!*********************************************>
+
+        <img src="Icones3.jpg" width="316" height="70" alt="icones3" class="margin00" usemap="#iconesMJ">
+      </div>
+      <!**************************** DONE WITH MESSAGING PAGE **************************!>
+
+
+
+
+
+
+      <map name="iconesSearch">
+        <area shape="rect" coords="0,3,75,67" id="GoProjects3">
+        <area shape="rect" coords="80,3,155,67" href="#searchdiv">
+        <area shape="rect" coords="159,3,234,67" id="GoMj2">
+        <area shape="rect" coords="238,3,313,67" id="GoProfile2">
+      </map>
+
+
+
+      <!*************************** THIRD PAGE - SEARCH PAGE **********************!>
+      <div id="real7">
+
+        <!****************** TELA *******************>
+        <div class="iconesfora">
+
+          <div id="searchdiv">
+            <img src="lupa.jpg" alt="lupa" class="fltl" id="LupaSearchIMG">
+            <input type="search" id="searchbox" class="fltl">
+            <hr class="clearbt margin0" id="searchhr" size="1">
+          </div>
+
+          <div id="Full">
+            <div>
+              <p class="SuggestedUP"> Suggested Users </p>
+
+              <div class="suggesteduser">
+                <div class="suggest">
+                </div>
+                <span class="suggestedusername">Samuel Padilla</span>
+              </div>
+              <div class="suggesteduser">
+                <div class="suggest">
+                </div>
+                <span class="suggestedusername">Tomás Queiroz</span>
+              </div>
+              <div class="suggesteduser">
+                <div class="suggest">
+                </div>
+                <span class="suggestedusername">Richard Yates</span>
+              </div>
+              <div class="suggesteduser">
+                <div class="suggest">
+                </div>
+                <span class="suggestedusername">Josh Doering</span>
+              </div>
+            </div>
+
+            <hr class="clearbt">
+
+            <div>
+              <p class="SuggestedUP"> Suggested Projects </p>
+
+              <div class="suggestedproject">
+                <div class="suggestP">
+                </div>
+                <span>Agua para Manaure</span>
+              </div>
+              <div class="suggestedproject">
+                <div class="suggestP">
+                </div>
+                <span>Bogota Sin Pobreza</span>
+              </div>
+              <div class="suggestedproject">
+                <div class="suggestP">
+                </div>
+                <span>Medellín Recicla</span>
+              </div>
+              <div class="suggestedproject">
+                <div class="suggestP">
+                </div>
+                <span>Educación Indiguena</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!*********************************************>
+
+        <img src="Icones2.jpg" width="316" height="70" alt="icones2" class="margin00" usemap="#iconesSearch">
+      </div>
+      <!**************************** DONE WITH SEARCH PAGE **************************!>
+
+
+
+
+
+      <map name="iconesProjects">
+        <area shape="rect" coords="0,3,75,67" href="#ProjectsHead">
+        <area shape="rect" coords="80,3,155,67" id="GoSearch3">
+        <area shape="rect" coords="159,3,234,67" id="GoMj3">
+        <area shape="rect" coords="238,3,313,67" id="GoProfile3">
+      </map>
+
+
+
+      <!*************************** FOURTH PAGE - PROJECTS PAGE **********************!>
+      <div id="real8">
+
+        <!****************** TELA *******************>
+
+          <h2 id="locationP"></h2>
+          <hr class="margin0" size="2">
+
+
+        <div class="iconesfora2">
+
+
+          <div id="ProjectsHead">
+            <img src="add.png" alt="add" id="NewProject" class="fltl">
+            Projects
+            <img src="dropp.png" alt="drop" id="DropProjects" class="fltr">
+          </div>
+          <hr class="margin0">
+
+
+          <div class="project fltl">
+          </div>
+          <h4 class="ProjectName"></h4>
+          <p class="ProjectDescp">
+          </p>
+          <div class="NGOReviewPhoto textleft">
+            <div class="espaco">
+              <span class="ONGListener" id="NGO0">NGO:
+              <span class="normal NGO" id="NGO00"></span></span>
+            </div>
+            <div class="paudomeioo fltl"></div>
+            <div class="espaco">
+              Reviews: <span class="normal Reviews"></span>
+            </div>
+            <div class="paudomeioo fltl"></div>
+            <div class="espaco">
+              Photos: <span class="normal Photos"></span>
+            </div>
+          </div>
+
+          <hr class="margin0">
+
+          <div class="project fltl">
+          </div>
+          <h4 class="ProjectName"></h4>
+          <p class="ProjectDescp">
+          </p>
+          <div class="NGOReviewPhoto2 textleft">
+            <div class="espaco2">
+              <span class="ONGListener" id="NGO1">NGO:
+              <span class="normal NGO" id="NGO11"></span></span>
+            </div>
+            <div class="paudomeioo fltl"></div>
+            <div class="espaco2">
+              Reviews: <span class="normal Reviews"></span>
+            </div>
+            <div class="paudomeioo fltl"></div>
+            <div class="espaco2">
+              Photos: <span class="normal Photos"></span>
+            </div>
+          </div>
+
+          <hr class="margin0">
+
+          <div class="project fltl">
+          </div>
+          <h4 class="ProjectName"></h4>
+          <p class="ProjectDescp">
+          </p>
+          <div class="NGOReviewPhoto3 textleft">
+            <div class="espaco3">
+              <span class="ONGListener" id="NGO2">NGO:
+              <span class="normal NGO" id="NGO22"></span></span>
+            </div>
+            <div class="paudomeioo fltl"></div>
+            <div class="espaco3">
+              Reviews: <span class="normal Reviews"></span>
+            </div>
+            <div class="paudomeioo fltl"></div>
+            <div class="espaco3">
+              Photos: <span class="normal Photos"></span>
+            </div>
+          </div>
+
+          <hr class="margin0">
+
+          <div class="project fltl">
+          </div>
+          <h4 class="ProjectName"></h4>
+          <p class="ProjectDescp">
+          </p>
+          <div class="NGOReviewPhoto4 textleft">
+            <div class="espaco4">
+              <span class="ONGListener" id="NGO3">NGO:
+              <span class="normal NGO" id="NGO33"></span></span>
+            </div>
+            <div class="paudomeioo fltl"></div>
+            <div class="espaco4">
+              Reviews: <span class="normal Reviews"></span>
+            </div>
+            <div class="paudomeioo fltl"></div>
+            <div class="espaco4">
+              Photos: <span class="normal Photos"></span>
+            </div>
+          </div>
+
+        </div>
+        <!*********************************************>
+
+        <img src="Icones1.jpg" width="316" height="70" alt="icones1" class="margin00" usemap="#iconesProjects">
+      </div>
+      <!**************************** DONE WITH PROJECTS PAGE **************************!>
+
+
+
+
+
+      <map name="iconesOthers">
+        <area shape="rect" coords="0,3,75,67" id="GoProjects4">
+        <area shape="rect" coords="80,3,155,67" id="GoSearch4">
+        <area shape="rect" coords="159,3,234,67" id="GoMj4">
+        <area shape="rect" coords="238,3,313,67" id="GoProfile4">
+      </map>
+
+      <!*********************************** OTHER'S PROFILE PAGE *******************************!>
+      <div id="real9">
+
+        <!****************** TELA *******************>
+        <div class="iconesfora">
+
+          <img class="back" src="back.jpg" alt="inviteicon" id="BackArrow">
+          <img id="dropProfile2" class="drop" src="drop2.jpg" alt="dropmenu">
+
+          <div class="profilepic">
+            <img src="profile.jpg" alt="profilepic">
+          </div>
+          <div id="NameDescription2">
+            <span id="OtherNameIs" class="Usernameis"></span>
+            <br>
+            <span id="ProfileDescription"></span>
+          </div>
+
+            <button id="Follow" type="button"> Follow </button>
+            <button id="Contact" type="button"> Contact </button>
+
+          <hr class="margin0 clearbt" size="2">
+            <span id="ProjectsProfile2"class="fltl">Projects</span>
+            <div class="paudomeio" class="fltr"></div>
+            <span id="PhotosProfile2" class="fltr">Photos</span>
+          <hr size="2" id="Profilehr2">
+
+
+        <!*******SAMUEL********>
+        <div id="ProjectsInProfileSP">
+           <div class="AProfileProjectCreator clearbt">
+             <p class="creator">Creator</p>
+             <p class="date">
+               24/07/2016 - <span class="ProfileLocation">Cartagena</span>, Colombia
+             </p>
+             <div class="project2 fltl">
+             </div>
+             <h4 class="ProjectName2">Agua Para Manaure</h4>
+             <p class="ProjectDescp2">
+               After a trip to the North of Colombia, I saw the possibility
+               to implement a destilation system to provide water to
+               the region of Manaure...
+             </p>
+           </div>
+
+           <hr>
+
+           <div class="AProfileProject clearbt">
+             <p class="date">
+               28/07/2016 - <span class="ProfileLocation">Medellín</span>, Colombia
+             </p>
+             <div class="project2 fltl">
+             </div>
+             <h4 class="ProjectName2">Medellín is Peace</h4>
+             <p class="ProjectDescp2">
+               This projects wants to change the vision of Medellín as a
+               violent city. Colombia PAZ organizaes tours around
+               places of the city to show tourists how the the city changed...
+             </p>
+           </div>
+
+           <hr>
+
+          <div class="AProfileProject clearbt">
+            <p class="date">
+              05/08/2016 - <span class="ProfileLocation">Bogota</span>, Colombia
+            </p>
+            <div class="project2 fltl">
+            </div>
+            <h4 class="ProjectName2">Water 4 Bogotá</h4>
+            <p class="ProjectDescp2">
+              Water 4 Bogota is a project that teaches safety water
+              procedures for people in the poor south area of Bogota.
+              The project is a weekly class on Saturdays...
+            </p>
+          </div>
+        </div>
+
+        <!******TOMAS***********>
+        <div id="ProjectsInProfileTQ">
+             <div class="AProfileProject clearbt">
+               <p class="date">
+                 15/07/2017 - <span class="ProfileLocation">Medellín</span>, Colombia
+               </p>
+               <div class="project2 fltl">
+               </div>
+               <h4 class="ProjectName2">Medellín is Peace</h4>
+               <p class="ProjectDescp2">
+                 This projects wants to change the vision of Medellín as a
+                 violent city. Colombia PAZ organizaes tours around
+                 places of the city to show tourists how the the city changed...
+               </p>
+             </div>
+
+             <hr>
+
+            <div class="AProfileProject clearbt">
+              <p class="date">
+                017/07/2017 - <span class="ProfileLocation">Bogota</span>, Colombia
+              </p>
+              <div class="project2 fltl">
+              </div>
+              <h4 class="ProjectName2">Clean Alcala</h4>
+              <p class="ProjectDescp2">
+                Clean Alcala is a simple project that
+                invites travelers to clean the Alcala
+                park every wednesday afternoon.
+                Alcala park is located...
+              </p>
+            </div>
+
+            <hr>
+
+           <div class="AProfileProject clearbt">
+             <p class="date">
+               24/11/2017 - <span class="ProfileLocation">Brasília</span>, Brasil
+             </p>
+             <div class="project2 fltl">
+             </div>
+             <h4 class="ProjectName2">Teach in Parque da Cidade</h4>
+             <p class="ProjectDescp2">
+               Every 15 days, a massive teaching
+               session occurs in Parque da Cidade. People with any type
+               of knowledge teach in sessions of 45 minutes...
+             </p>
+           </div>
+
+           <hr>
+
+          <div class="AProfileProject clearbt">
+            <p class="date">
+              2/12/2017 - <span class="ProfileLocation">Brasília</span>, Brasil
+            </p>
+            <div class="project2 fltl">
+            </div>
+            <h4 class="ProjectName2">Clean Esplanada</h4>
+            <p class="ProjectDescp2">
+              One of the most iconic places of
+              Brasilia is The Esplanada dos Ministerios
+              This project organizes a monthly clean up
+              of this iconical place..."
+            </p>
+          </div>
+        </div>
+
+        <!*******RICHARD********>
+        <div id="ProjectsInProfileRY">
+           <div class="AProfileProject clearbt">
+             <p class="date">
+               29/11/2017 - <span class="ProfileLocation">Sioux City</span>, USA
+             </p>
+             <div class="project2 fltl">
+             </div>
+             <h4 class="ProjectName2">Campus Kitchen</h4>
+             <p class="ProjectDescp2">
+               The project takes left-overs
+               from the cafeteria to a local church
+               to feed homeless people
+               Every Monday...
+             </p>
+           </div>
+
+           <hr>
+
+          <div class="AProfileProject clearbt">
+            <p class="date">
+              05/08/2016 - <span class="ProfileLocation">Sioux City</span>, USA
+            </p>
+            <div class="project2 fltl">
+            </div>
+            <h4 class="ProjectName2">Recycling Day</h4>
+            <p class="ProjectDescp2">
+              This project, that started in Morningside
+              College, consists on knocking
+              on people's door every sunday night to
+              collect recycling materials...
+            </p>
+          </div>
+        </div>
+
+        <!******JOSH********>
+        <div id="ProjectsInProfileJD">
+          <div class="AProfileProject clearbt">
+            <p class="date">
+              10/01/2016 - <span class="ProfileLocation">Sioux City</span>, USA
+            </p>
+            <div class="project2 fltl">
+            </div>
+            <h4 class="ProjectName2">Recycling Day</h4>
+            <p class="ProjectDescp2">
+              This project, that started in Morningside
+              College, consists on knocking
+              on people's door every sunday night to
+              collect recycling materials...
+            </p>
+          </div>
+
+           <hr>
+
+             <div class="AProfileProject clearbt">
+               <p class="date">
+                 15/03/2015 - <span class="ProfileLocation">Sioux City</span>, USA
+               </p>
+               <div class="project2 fltl">
+               </div>
+               <h4 class="ProjectName2">Play with the Kids</h4>
+               <p class="ProjectDescp2">
+                 The Sioux City Go organization
+                 organizaes a monthly play around with the kids from public
+                 schools in town. The idea of the project is to
+                 teach the kids valueable things and...
+               </p>
+             </div>
+
+             <hr>
+
+               <div class="AProfileProject clearbt">
+                 <p class="date">
+                   25/06/2017 - <span class="ProfileLocation">Sioux City</span>, USA
+                 </p>
+                 <div class="project2 fltl">
+                 </div>
+                 <h4 class="ProjectName2">Retirement Visit</h4>
+                 <p class="ProjectDescp2">
+                   The Sioux City retirement house
+                   takes volunteers to play and share
+                   stories with the residents of the house.
+                   Every Friday afternoon...
+                 </p>
+               </div>
+
+               <hr>
+
+               <div class="AProfileProject clearbt">
+                 <p class="date">
+                   14/10/2017 - <span class="ProfileLocation">Sioux City</span>, USA
+                 </p>
+                 <div class="project2 fltl">
+                 </div>
+                 <h4 class="ProjectName2">Campus Kitchen</h4>
+                 <p class="ProjectDescp2">
+                   The project takes left-overs
+                   from the cafeteria to a local church
+                   to feed homeless people
+                   Every Monday...
+                  </p>
+                </div>
+              </div>
+        <!*********************>
+
+        <!*******SAMUEL********>
+         <div id="PhotosInProfileSP">
+           <div class="APhotoL">
+             <img src="Samuel0.JPG" class="photo">
+           </div>
+           <div class="APhotoR">
+             <img src="Samuel1.JPG" class="photo">
+           </div>
+           <div class="APhotoL">
+             <img src="Samuel2.JPG" class="photo">
+           </div>
+           <div class="APhotoR">
+             <img src="Samuel3.JPG" class="photo">
+           </div>
+           <div class="APhotoL">
+             <img src="Samuel4.JPG" class="photo">
+           </div>
+           <div class="APhotoR">
+             <img src="Samuel5.JPG" class="photo">
+           </div>
+         </div>
+
+         <!*******TOMAS********>
+          <div id="PhotosInProfileTQ">
+            <div class="APhotoL">
+              <img src="Samuel4.JPG" class="photo">
+            </div>
+          </div>
+
+          <!*******RICHARD********>
+           <div id="PhotosInProfileRY">
+             <p id="hasnt">This user hasn't post any photos yet.</p>
+           </div>
+
+           <!*******JOSH********>
+            <div id="PhotosInProfileJD">
+              <div class="APhotoL">
+              </div>
+              <div class="APhotoR">
+              </div>
+              <div class="APhotoL">
+              </div>
+              <div class="APhotoR">
+              </div>
+              <div class="APhotoL">
+              </div>
+              <div class="APhotoR">
+              </div>
+              <div class="APhotoL">
+              </div>
+              <div class="APhotoR">
+              </div>
+            </div>
+
+
+         <!********************>
+
+
+        </div>
+        <!*********************************************>
+
+        <img src="Icones2.jpg" width="316" height="70"  alt="icones2" class="margin00" usemap="#iconesOthers">
+      </div>
+      <!**************************** DONE WITH OTHERS PROFILE PAGE **************************!>
+
+
+
+
+
+      <!**************************** PROJECTS SEARCH PAGE **************************!>
+      <div id="real10">
+
+        <!****************** TELA *******************>
+          <img class="back" src="back.jpg" alt="inviteicon" id="BackArrow2">
+          <h2 id="locationP2"></h2>
+          <hr class="margin0 clearbt" size="2">
+
+
+        <div class="iconesfora2">
+
+
+          <div id="ProjectsHead2">
+            <img src="add.png" alt="add" id="NewProject2" class="fltl">
+            Projects
+            <img src="dropp.png" alt="drop" id="DropProjects2" class="fltr">
+          </div>
+          <hr class="margin0">
+
+
+          <div class="project20 fltl">
+          </div>
+          <h4 class="ProjectName20"></h4>
+          <p class="ProjectDescp20">
+          </p>
+          <div class="NGOReviewPhoto20 textleft">
+            <div class="espaco20">
+              <span class="ONGListener" id="NGO4">NGO:
+              <span class="normal NGO2" id="NGO44"></span></span>
+            </div>
+            <div class="paudomeioo fltl"></div>
+            <div class="espaco20">
+              Reviews: <span class="normal Reviews2"></span>
+            </div>
+            <div class="paudomeioo fltl"></div>
+            <div class="espaco20">
+              Photos: <span class="normal Photos2"></span>
+            </div>
+          </div>
+
+          <hr class="margin0">
+
+          <div class="project20 fltl">
+          </div>
+          <h4 class="ProjectName20"></h4>
+          <p class="ProjectDescp20">
+          </p>
+          <div class="NGOReviewPhoto22 textleft">
+            <div class="espaco22">
+            <span class="ONGListener" id="NGO5">NGO:
+            <span class="normal NGO2" id="NGO55"></span></span>
+            </div>
+            <div class="paudomeioo fltl"></div>
+            <div class="espaco22">
+              Reviews: <span class="normal Reviews2"></span>
+            </div>
+            <div class="paudomeioo fltl"></div>
+            <div class="espaco22">
+              Photos: <span class="normal Photos2"></span>
+            </div>
+          </div>
+
+          <hr class="margin0">
+
+          <div class="project20 fltl">
+          </div>
+          <h4 class="ProjectName20"></h4>
+          <p class="ProjectDescp20">
+          </p>
+          <div class="NGOReviewPhoto32 textleft">
+            <div class="espaco32">
+              <span class="ONGListener" id="NGO6">NGO:
+              <span class="normal NGO2" id="NGO66"></span></span>
+            </div>
+            <div class="paudomeioo fltl"></div>
+            <div class="espaco32">
+              Reviews: <span class="normal Reviews2"></span>
+            </div>
+            <div class="paudomeioo fltl"></div>
+            <div class="espaco32">
+              Photos: <span class="normal Photos2"></span>
+            </div>
+          </div>
+
+          <hr class="margin0">
+
+          <div class="project20 fltl">
+          </div>
+          <h4 class="ProjectName20"></h4>
+          <p class="ProjectDescp20">
+          </p>
+          <div class="NGOReviewPhoto42 textleft">
+            <div class="espaco42">
+              <span class="ONGListener" id="NGO7">NGO:
+              <span class="normal NGO2" id="NGO77"></span></span>
+            </div>
+            <div class="paudomeioo fltl"></div>
+            <div class="espaco42">
+              Reviews: <span class="normal Reviews2"></span>
+            </div>
+            <div class="paudomeioo fltl"></div>
+            <div class="espaco42">
+              Photos: <span class="normal Photos2"></span>
+            </div>
+          </div>
+
+        </div>
+        <!*********************************************>
+
+        <img src="Icones2.jpg" width="316" height="70" alt="icones1" class="margin00" usemap="#iconesOthers">
+      </div>
+      <!**************************** DONE WITH PROJECTS SEARCH PAGE **************************!>
+
+
+
+
+
+
+      <!**************************** ONG PROFILE PAGE **************************!>
+      <div id="real11">
+
+        <!****************** TELA *******************>
+        <img class="back" src="back.jpg" alt="inviteicon" id="BackArrowONG">
+        <h2 id="NameONG" class="NameONG"></h2>
+        <img id="dropProfile" class="drop" src="drop2.jpg" alt="dropmenu">
+        <hr class="margin0 clearbt" size="1">
+
+
+        <div class="iconesfora2">
+
+          <div id="ONGPic">
+          </div>
+          <div id="NameButtons">
+            <p id="ONGNameIs" class="NameONG"></p>
+            <button id="FollowONG" type="button"> Follow </button>
+            <button id="ContactONG" type="button"> Contact </button>
+          </div>
+
+          <p id="Description">
+            <strong id="DescriptionH">Description:</strong><br>
+            <span id="DescriptionB">
+
+            </span>
+          </p>
+
+          <hr class="margin0" size="2">
+            <span id="ONGProjectsProfile"class="fltl">Projects</span>
+            <div class="paudomeio" class="fltr"></div>
+            <span id="ONGPhotosProfile" class="fltr">Photos</span>
+          <hr class="margin0" size="2" id="ONGProfilehr">
+
+          <div id="ProjectsInProfileONG">
+
+            <div class="AProfileProjectCreator2 clearbt">
+              <p class="date">
+                <span class="ProfileLocation2"></span><span class="Country"></span>
+              </p>
+              <div class="project2 fltl">
+              </div>
+              <h4 class="ProjectName600"></h4>
+              <p class="ProjectDescp600">
+              </p>
+            </div>
+
+            <hr class="margin0">
+
+            <div class="AProfileProjectCreator2 clearbt">
+              <p class="date">
+                <span class="ProfileLocation2"></span><span class="Country"></span>
+              </p>
+              <div class="project2 fltl">
+              </div>
+              <h4 class="ProjectName600"></h4>
+              <p class="ProjectDescp600">
+              </p>
+            </div>
+
+          </div>
+
+          <div id="PhotosInProfileONG">
+            <div class="APhotoONG">
+            </div>
+            <div class="APhotoONG">
+            </div>
+            <div class="APhotoONG">
+            </div>
+            <div class="APhotoONG">
+            </div>
+            <div class="APhotoONG">
+            </div>
+            <div class="APhotoONG">
+            </div>
+            <div class="APhotoONG">
+            </div>
+            <div class="APhotoONG">
+            </div>
+            <div class="APhotoONG">
+            </div>
+            <div class="APhotoONG">
+            </div>
+            <div class="APhotoONG">
+            </div>
+            <div class="APhotoONG">
+            </div>
+            <div class="APhotoONG">
+            </div>
+            <div class="APhotoONG">
+            </div>
+            <div class="APhotoONG">
+            </div>
+            <div class="APhotoONG">
+            </div>
+          </div>
+
+        </div>
+        <!*********************************************>
+
+        <img src="" data-pag="" width="316" height="70" id="IconesONG" alt="icones1" class="margin00" usemap="#iconesOthers">
+      </div>
+      <!**************************** DONE WITH ONG PROFILE PAGE **************************!>
+
+
+
+
+
+      <!**************************** A PROJECT PAGE **************************!>
+      <div id="real12">
+
+        <!****************** TELA *******************>
+        <div class="iconesfora">
+
+          <div id="AProjectPhoto">
+            <div id="AProjectTitle">
+              <img class="back" src="back.png" alt="inviteicon" id="BackArrowAProject">
+              <p id="Titlexx">Love Army for Somalia</p>
+            </div>
+          </div>
+
+          <div class="clearbt">
+            <button typye="button" id="HelpUs">
+              Help Us!
+            </button>
+          </div>
+
+          <div id="ProjectStats">
+            <div id="Impacted">
+              <span class="Numero">87</span>
+              <p class="margin00">Impacted</p>
+            </div>
+
+            <div id="divProjectNGO">
+              <div id="ProjectNGO">
+              </div>
+              <p> Love Army </p>
+            </div>
+
+            <div id="Participants">
+              <span class="Numero">46</span>
+              <p class="margin00">Participants</p>
+            </div>
+          </div>
+
+          <hr class="margin0" size="2">
+            <div id="AProjectDescription"class="fltl">Description</div>
+            <div class="paudomeio" class="fltl"></div>
+            <div id="AProjectReviews" class="fltl">Reviews</div>
+            <div class="paudomeio" class="fltr"></div>
+            <div id="AProjectsPhotos" class="fltr">Photos</div>
+          <hr class="margin0" size="2" id="Projecthr1">
+          <hr class="margin0" size="2" id="Projecthr2">
+
+        <!****Description******>
+        <p id="TheActualDescription">
+          #LoveArmy is a project started by influnecers, actors
+          and entrepreneurs, to heal immediate world issues.
+          Using the help and donations from millions of people
+          around the world, Love Army for Somalia raised $2m dollars
+          to fight the humanitarian crisis in Somalia.
+          We fileld a plane with food and water to and took it too
+          Somalia to deliver it to the people. <br>
+          We need help to organize the next delivery and
+          build an improvised damn to take water to 10 villages
+          in Somalia. Come work with us!
+        </p>
+
+        <!****Reviews******>
+          <div class="NameofTheUser">
+            <div class="reviewer">
+            </div>
+            <p class="TheReview">
+              <strong>Arthur Ribas:</strong>
+              This project really helped the community,
+              it was beautiful to see how people can come together to make
+              something good for others. <br>
+              I personally learned a lot from giving, I loved this project,
+              thanks to Love Army and all the people involved!
+            </p>
+          </div>
+
+          <hr class="clearbt reviewshr">
+
+          <div class="NameofTheUser">
+            <div class="reviewer">
+            </div>
+            <p class="TheReview">
+              <strong>Anjen Donaldson:</strong>
+              This was a wonderful project, wonderful
+              impact, wonderful NGO, and wonderful experience.
+              I really Recommend it!
+            </p>
+          </div>
+
+          <hr class="clearbt reviewshr">
+
+          <div class="NameofTheUser">
+            <div class="reviewer">
+            </div>
+            <p class="TheReview">
+              <strong>Richard Yates:</strong>
+              I am really amazed by how mucg we can achieve
+              when we come together with one common purpose.
+              Grateful to everyone involved in this project,
+              it was wonderful to be part of it and to see it
+              changing so many lives!
+            </p>
+          </div>
+
+          <hr class="clearbt reviewshr">
+
+          <div class="NameofTheUser">
+            <div class="reviewer">
+            </div>
+            <p class="TheReview">
+              <strong>Josh Doering:</strong>
+              Traveling can really change the world.
+              Who would've think that travelers coming together
+              could achieve so much impact?! Wonderful to see
+              that we can make a difference in the world!
+            </p>
+          </div>
+
+          <hr class="clearbt reviewshr">
+
+          <div class="NameofTheUser">
+            <div class="reviewer">
+            </div>
+            <p class="TheReview">
+              <strong>Tomas Queiroz:</strong>
+              Awesome project, awesome impact and organization.
+              I really look forward to the impact this platform
+              can have in the world thanks to projects like this.
+            </p>
+          </div>
+
+          <hr class="clearbt reviewshr">
+
+          <div class="NameofTheUser">
+            <div class="reviewer">
+            </div>
+            <p class="TheReview">
+              <strong>Samuel Padilla:</strong>
+              Congratulations to every single one who
+              got involved. You made a difference.
+              Traveling Can Change the World!
+            </p>
+          </div>
+
+        <!****Photos******>
+          <div id="PhotosInAProject">
+            <div class="FotoDeProjeto">
+            </div>
+            <div class="FotoDeProjeto">
+            </div>
+            <div class="FotoDeProjeto">
+            </div>
+            <div class="FotoDeProjeto">
+            </div>
+            <div class="FotoDeProjeto">
+            </div>
+            <div class="FotoDeProjeto">
+            </div>
+            <div class="FotoDeProjeto">
+            </div>
+            <div class="FotoDeProjeto">
+            </div>
+          </div>
+
+
+        </div>
+        <!*********************************************>
+
+        <img src="" data-pagPr="" width="316" height="70" id="IconesAProject" alt="icones1" class="margin00" usemap="#iconesOthers">
+      </div>
+        <!*********************************************>
+
+
+
+
+        <!*************************** A MESSAGE PAGE **********************!>
+        <div id="real13">
+
+          <!****************** TELA *******************>
+          <div id="ARealMessage">
+          <img class="back" src="back.jpg" alt="inviteicon" id="BackMessage">
+          Love Army
+          <img src="info.png" id="MessageInfo" width="28" height="28">
+          </div>
+
+          <hr class="margin0" size="1">
+
+          <div class="iconesfora2">
+
+            <div id="SupremeMessages">
+              <p id="ExplanationMessage">
+                Hello There! Thank you for your interest in helping LoveArmy For Somalia. <br>
+                Can you please tell us why you want to participate
+                in the project, how can you help,
+                when and how long you will be available to join us, and feel free to
+                ask any questions!
+              </p>
+              <p class="MessagesOfUser">
+              </p>
+              <p class="MessagesOfUser">
+              </p>
+              <p class="MessagesOfUser">
+              </p>
+              <p class="MessagesOfUser">
+              </p>
+              <p class="MessagesOfUser">
+              </p>
+              <p class="MessagesOfUser">
+              </p>
+              <p class="MessagesOfUser">
+              </p>
+              <p class="MessagesOfUser">
+              </p>
+              <p class="MessagesOfUser">
+              </p>
+              <p class="MessagesOfUser">
+              </p>
+            </div>
+
+            <input type="text" id="YourMessage">
+            <button type="button" id="SendMessage">Send</button>
+          </div>
+          <!*********************************************>
+
+          <img src="Icones3.jpg" width="316" height="70" alt="icones3" class="margin00" usemap="#iconesMJ">
+        </div>
+        <!**************************** DONE WITH MESSAGING PAGE **************************!>
+
+
+
+      <!*** Home Button ***!>
+      <div id="homebut"></div>
+      <!*******************!>
+    </div>
+  </div>
+  </body>
+</html>
