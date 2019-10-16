@@ -9,4 +9,4 @@ The full working prototype can be found here:
 https://shire.csci.morningside.edu/scp002/Travel&Do/Travel&Do.html
 
 A similar approach to desing an app with working front to back connection can be found here:
-http://shire.csci.morningside.edu/scp002/Qneo/index.html
+https://shire.csci.morningside.edu/scp002/Qneo/index.html
